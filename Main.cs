@@ -15,6 +15,8 @@ namespace minecraft_server_launchers
   public partial class Main : MaterialForm
   {
     private static MaterialSkinManager msm = MaterialSkinManager.Instance;
+    public Server Server = new();
+
     public Main()
     {
       InitializeComponent();
@@ -22,6 +24,11 @@ namespace minecraft_server_launchers
       msm.AddFormToManage(this);
       msm.Theme = MaterialSkinManager.Themes.DARK;
       ChangeColor("blue");
+
+      Server.OnOutput = () =>
+      {
+        tbOutput.AppendText(Server.Data);
+      };
     }
 
     private void ChangeColor(string colorS = "blue-gray")
@@ -49,5 +56,24 @@ namespace minecraft_server_launchers
       msm.ColorScheme = cs;
     }
 
+    private void btnStart_Click(object sender, EventArgs e)
+    {
+      Server.Start();
+    }
+
+    private void btnInput_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void tbInput_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void tpgLog_Click(object sender, EventArgs e)
+    {
+
+    }
   }
 }

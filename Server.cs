@@ -1,35 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace minecraft_server_launchers
 {
-  class Server
+  public class Server
   {
     private Process process = new Process();
     public int MaxRam { get; set; }
     public int MinRam { get; set; }
     public string BukkitPath { get; set; }
-    public string Data
-    {
-      get => data;
-      private set
-      {
-        data = value;
-        Output.AppendText($"\n{data}");
-      }
-    }
-    private string data;
+    public string Data { get; private set; }
+
     public bool IsOnline = false;
 
     public Action OnStarted = () => { };
     public Action OnExited = () => { };
-
-    public RichTextBox Output { get; set; }
+    public Action OnOutput = () => { };
 
     public void Start()
     {
@@ -41,6 +27,7 @@ namespace minecraft_server_launchers
       {
         process.Dispose();
         process = new Process();
+        
       }
     }
 
@@ -54,8 +41,8 @@ namespace minecraft_server_launchers
       process.StartInfo.RedirectStandardInput = true;
       process.StartInfo.RedirectStandardError = true;
 
-      process.OutputDataReceived += new DataReceivedEventHandler(OnOutput);
-      process.ErrorDataReceived += new DataReceivedEventHandler(OnOutput);
+      process.OutputDataReceived += new DataReceivedEventHandler(Output);
+      process.ErrorDataReceived += new DataReceivedEventHandler(Output);
       process.Exited += new EventHandler(Exited);
 
       process.Start();
@@ -70,9 +57,10 @@ namespace minecraft_server_launchers
       process.Kill();
     }
 
-    private void OnOutput(object sender, DataReceivedEventArgs e)
+    private void Output(object sender, DataReceivedEventArgs e)
     {
       Data = e.Data;
+      OnOutput();
     }
 
     public void Input(string inputCommand)
@@ -86,6 +74,6 @@ namespace minecraft_server_launchers
       process = new Process();
       OnExited();
     }
-    
+
   }
 }
