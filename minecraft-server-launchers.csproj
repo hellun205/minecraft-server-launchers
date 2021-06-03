@@ -5,11 +5,36 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>minecraft_server_launchers</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <StartupObject>minecraft_server_launchers.Program</StartupObject>
+    <AssemblyName>msl_v2</AssemblyName>
+    <Version>2.0.0</Version>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright 2021 하늘</Copyright>
+    <PackageLicenseExpression />
+    <RepositoryUrl>https://github.com/hellun205/minecraft-server-launchers</RepositoryUrl>
+    <Authors>하늘</Authors>
+    <PackageIcon>icon.ico</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="MaterialSkin.dll" />
+    <None Remove="Newtonsoft.Json.dll" />
+    <None Include="icon.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialSkin.2" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MaterialSkin.dll" />
+    <Resource Include="Newtonsoft.Json.dll" />
   </ItemGroup>
 
 </Project>

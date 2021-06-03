@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using MaterialSkin;
 using MaterialSkin.Controls;
-using MaterialSkin;
+using System;
 
 namespace minecraft_server_launchers
 {
@@ -72,6 +64,11 @@ namespace minecraft_server_launchers
     }
 
     private void tpgLog_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }

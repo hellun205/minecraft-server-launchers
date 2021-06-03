@@ -5,10 +5,10 @@
   },
   "projects": {
     "D:\\dev\\csharp\\minecraft-server-launchers\\minecraft-server-launchers.csproj": {
-      "version": "1.0.0",
+      "version": "2.0.0",
       "restore": {
         "projectUniqueName": "D:\\dev\\csharp\\minecraft-server-launchers\\minecraft-server-launchers.csproj",
-        "projectName": "minecraft-server-launchers",
+        "projectName": "msl_v2",
         "projectPath": "D:\\dev\\csharp\\minecraft-server-launchers\\minecraft-server-launchers.csproj",
         "packagesPath": "C:\\Users\\c\\.nuget\\packages\\",
         "outputPath": "D:\\dev\\csharp\\minecraft-server-launchers\\obj\\",
