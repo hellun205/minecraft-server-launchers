@@ -1,6 +1,8 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
+using System.IO;
+using System.Drawing;
 
 namespace minecraft_server_launchers
 {
@@ -19,8 +21,17 @@ namespace minecraft_server_launchers
 
       Server.OnOutput = () =>
       {
-        tbOutput.AppendText(Server.Data);
+        tbOutput.AppendText($"\n{Server.Data}");
       };
+      Server.OnStarted = () =>
+      {
+        ChangeColor("green");
+      };
+      Server.OnExited = () =>
+      {
+        ChangeColor("blue");
+      };
+      Loads();
     }
 
     private void ChangeColor(string colorS = "blue-gray")
@@ -71,6 +82,19 @@ namespace minecraft_server_launchers
     private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+
+    private void Loads()
+    {
+      if (!Directory.Exists("./server")) Directory.CreateDirectory("./server");
+      var fileInfo = new DirectoryInfo("./server").GetFiles("*.jar");
+      if (fileInfo.Length > 0)
+      {
+        btnBukkitFile.Image = Icon.ExtractAssociatedIcon(fileInfo[0].FullName).ToBitmap();
+        btnBukkitFile.Text = fileInfo[0].Name;
+      }
+      sliMaxRam.RangeMax = ram;
+      sliMinRam.RangeMax = ram;
     }
   }
 }

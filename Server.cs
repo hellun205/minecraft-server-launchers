@@ -26,8 +26,7 @@ namespace minecraft_server_launchers
       catch
       {
         process.Dispose();
-        process = new Process();
-        
+        process = new Process();       
       }
     }
 
@@ -70,6 +69,7 @@ namespace minecraft_server_launchers
 
     private void Exited(object sender, EventArgs e)
     {
+      process.Kill();
       process.Dispose();
       process = new Process();
       OnExited();

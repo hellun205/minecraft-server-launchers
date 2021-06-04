@@ -29,20 +29,23 @@
         private void InitializeComponent()
         {
       this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
+      this.tpgLog = new System.Windows.Forms.TabPage();
+      this.lsvPList = new MaterialSkin.Controls.MaterialListView();
+      this.labPStr = new MaterialSkin.Controls.MaterialLabel();
+      this.prbPInt = new MaterialSkin.Controls.MaterialProgressBar();
+      this.btnInput = new MaterialSkin.Controls.MaterialButton();
+      this.tbInput = new MaterialSkin.Controls.MaterialTextBox();
+      this.tbOutput = new MaterialSkin.Controls.MaterialMultiLineTextBox();
       this.tpgSetting = new System.Windows.Forms.TabPage();
+      this.btnBukkitFile = new System.Windows.Forms.Button();
       this.tabSelector = new MaterialSkin.Controls.MaterialTabSelector();
       this.btnStart = new MaterialSkin.Controls.MaterialButton();
-      this.tbOutput = new MaterialSkin.Controls.MaterialMultiLineTextBox();
-      this.tbInput = new MaterialSkin.Controls.MaterialTextBox();
-      this.btnInput = new MaterialSkin.Controls.MaterialButton();
-      this.prbPInt = new MaterialSkin.Controls.MaterialProgressBar();
-      this.labPStr = new MaterialSkin.Controls.MaterialLabel();
-      this.lsvPList = new MaterialSkin.Controls.MaterialListView();
-      this.tpgLog = new System.Windows.Forms.TabPage();
-      this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+      this.ofd = new System.Windows.Forms.OpenFileDialog();
+      this.sliMinRam = new MaterialSkin.Controls.MaterialSlider();
+      this.sliMaxRam = new MaterialSkin.Controls.MaterialSlider();
       this.tabControl.SuspendLayout();
-      this.tpgSetting.SuspendLayout();
       this.tpgLog.SuspendLayout();
+      this.tpgSetting.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl
@@ -62,9 +65,131 @@
       this.tabControl.TabIndex = 0;
       this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
       // 
+      // tpgLog
+      // 
+      this.tpgLog.Controls.Add(this.lsvPList);
+      this.tpgLog.Controls.Add(this.labPStr);
+      this.tpgLog.Controls.Add(this.prbPInt);
+      this.tpgLog.Controls.Add(this.btnInput);
+      this.tpgLog.Controls.Add(this.tbInput);
+      this.tpgLog.Controls.Add(this.tbOutput);
+      this.tpgLog.Location = new System.Drawing.Point(4, 24);
+      this.tpgLog.Name = "tpgLog";
+      this.tpgLog.Padding = new System.Windows.Forms.Padding(3);
+      this.tpgLog.Size = new System.Drawing.Size(730, 335);
+      this.tpgLog.TabIndex = 0;
+      this.tpgLog.Text = "Log";
+      this.tpgLog.UseVisualStyleBackColor = true;
+      this.tpgLog.Click += new System.EventHandler(this.tpgLog_Click);
+      // 
+      // lsvPList
+      // 
+      this.lsvPList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.lsvPList.AutoSizeTable = false;
+      this.lsvPList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+      this.lsvPList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.lsvPList.Depth = 0;
+      this.lsvPList.FullRowSelect = true;
+      this.lsvPList.HideSelection = false;
+      this.lsvPList.Location = new System.Drawing.Point(527, 40);
+      this.lsvPList.MinimumSize = new System.Drawing.Size(200, 100);
+      this.lsvPList.MouseLocation = new System.Drawing.Point(-1, -1);
+      this.lsvPList.MouseState = MaterialSkin.MouseState.OUT;
+      this.lsvPList.Name = "lsvPList";
+      this.lsvPList.OwnerDraw = true;
+      this.lsvPList.Size = new System.Drawing.Size(200, 289);
+      this.lsvPList.TabIndex = 5;
+      this.lsvPList.UseCompatibleStateImageBehavior = false;
+      this.lsvPList.View = System.Windows.Forms.View.Details;
+      // 
+      // labPStr
+      // 
+      this.labPStr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.labPStr.Depth = 0;
+      this.labPStr.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+      this.labPStr.Location = new System.Drawing.Point(527, 14);
+      this.labPStr.MouseState = MaterialSkin.MouseState.HOVER;
+      this.labPStr.Name = "labPStr";
+      this.labPStr.Size = new System.Drawing.Size(200, 23);
+      this.labPStr.TabIndex = 4;
+      this.labPStr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // prbPInt
+      // 
+      this.prbPInt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.prbPInt.Depth = 0;
+      this.prbPInt.Location = new System.Drawing.Point(527, 6);
+      this.prbPInt.MouseState = MaterialSkin.MouseState.HOVER;
+      this.prbPInt.Name = "prbPInt";
+      this.prbPInt.Size = new System.Drawing.Size(200, 5);
+      this.prbPInt.TabIndex = 3;
+      // 
+      // btnInput
+      // 
+      this.btnInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.btnInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.btnInput.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+      this.btnInput.Depth = 0;
+      this.btnInput.HighEmphasis = true;
+      this.btnInput.Icon = null;
+      this.btnInput.Location = new System.Drawing.Point(457, 290);
+      this.btnInput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.btnInput.MouseState = MaterialSkin.MouseState.HOVER;
+      this.btnInput.Name = "btnInput";
+      this.btnInput.Size = new System.Drawing.Size(64, 36);
+      this.btnInput.TabIndex = 2;
+      this.btnInput.Text = "Input";
+      this.btnInput.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+      this.btnInput.UseAccentColor = false;
+      this.btnInput.UseVisualStyleBackColor = true;
+      this.btnInput.Click += new System.EventHandler(this.btnInput_Click);
+      // 
+      // tbInput
+      // 
+      this.tbInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.tbInput.Depth = 0;
+      this.tbInput.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+      this.tbInput.Hint = "Input command...";
+      this.tbInput.LeadingIcon = null;
+      this.tbInput.Location = new System.Drawing.Point(3, 290);
+      this.tbInput.MaxLength = 50;
+      this.tbInput.MouseState = MaterialSkin.MouseState.OUT;
+      this.tbInput.Multiline = false;
+      this.tbInput.Name = "tbInput";
+      this.tbInput.Size = new System.Drawing.Size(447, 36);
+      this.tbInput.TabIndex = 1;
+      this.tbInput.Text = "";
+      this.tbInput.TrailingIcon = null;
+      this.tbInput.UseTallSize = false;
+      this.tbInput.TextChanged += new System.EventHandler(this.tbInput_TextChanged);
+      // 
+      // tbOutput
+      // 
+      this.tbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tbOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+      this.tbOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.tbOutput.Depth = 0;
+      this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+      this.tbOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+      this.tbOutput.Location = new System.Drawing.Point(3, 3);
+      this.tbOutput.MouseState = MaterialSkin.MouseState.HOVER;
+      this.tbOutput.Name = "tbOutput";
+      this.tbOutput.ReadOnly = true;
+      this.tbOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+      this.tbOutput.Size = new System.Drawing.Size(518, 281);
+      this.tbOutput.TabIndex = 0;
+      this.tbOutput.Text = "";
+      // 
       // tpgSetting
       // 
-      this.tpgSetting.Controls.Add(this.materialButton1);
+      this.tpgSetting.Controls.Add(this.sliMaxRam);
+      this.tpgSetting.Controls.Add(this.sliMinRam);
+      this.tpgSetting.Controls.Add(this.btnBukkitFile);
       this.tpgSetting.Location = new System.Drawing.Point(4, 24);
       this.tpgSetting.Name = "tpgSetting";
       this.tpgSetting.Padding = new System.Windows.Forms.Padding(3);
@@ -72,6 +197,18 @@
       this.tpgSetting.TabIndex = 1;
       this.tpgSetting.Text = "Setting";
       this.tpgSetting.UseVisualStyleBackColor = true;
+      // 
+      // btnBukkitFile
+      // 
+      this.btnBukkitFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnBukkitFile.Location = new System.Drawing.Point(6, 6);
+      this.btnBukkitFile.Name = "btnBukkitFile";
+      this.btnBukkitFile.Size = new System.Drawing.Size(100, 100);
+      this.btnBukkitFile.TabIndex = 0;
+      this.btnBukkitFile.Text = "none";
+      this.btnBukkitFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+      this.btnBukkitFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+      this.btnBukkitFile.UseVisualStyleBackColor = true;
       // 
       // tabSelector
       // 
@@ -107,143 +244,31 @@
       this.btnStart.UseVisualStyleBackColor = true;
       this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
       // 
-      // tbOutput
+      // ofd
       // 
-      this.tbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.tbOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.tbOutput.Depth = 0;
-      this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      this.tbOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-      this.tbOutput.Location = new System.Drawing.Point(3, 3);
-      this.tbOutput.MouseState = MaterialSkin.MouseState.HOVER;
-      this.tbOutput.Name = "tbOutput";
-      this.tbOutput.ReadOnly = true;
-      this.tbOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-      this.tbOutput.Size = new System.Drawing.Size(518, 281);
-      this.tbOutput.TabIndex = 0;
-      this.tbOutput.Text = "";
+      this.ofd.FileName = "openFileDialog1";
       // 
-      // tbInput
+      // sliMinRam
       // 
-      this.tbInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.tbInput.Depth = 0;
-      this.tbInput.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-      this.tbInput.Hint = "Input command...";
-      this.tbInput.LeadingIcon = null;
-      this.tbInput.Location = new System.Drawing.Point(3, 290);
-      this.tbInput.MaxLength = 50;
-      this.tbInput.MouseState = MaterialSkin.MouseState.OUT;
-      this.tbInput.Multiline = false;
-      this.tbInput.Name = "tbInput";
-      this.tbInput.Size = new System.Drawing.Size(447, 36);
-      this.tbInput.TabIndex = 1;
-      this.tbInput.Text = "";
-      this.tbInput.TrailingIcon = null;
-      this.tbInput.UseTallSize = false;
-      this.tbInput.TextChanged += new System.EventHandler(this.tbInput_TextChanged);
+      this.sliMinRam.Depth = 0;
+      this.sliMinRam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+      this.sliMinRam.Location = new System.Drawing.Point(170, 52);
+      this.sliMinRam.MouseState = MaterialSkin.MouseState.HOVER;
+      this.sliMinRam.Name = "sliMinRam";
+      this.sliMinRam.Size = new System.Drawing.Size(227, 40);
+      this.sliMinRam.TabIndex = 1;
+      this.sliMinRam.Text = "Min Ram";
       // 
-      // btnInput
+      // sliMaxRam
       // 
-      this.btnInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnInput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.btnInput.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-      this.btnInput.Depth = 0;
-      this.btnInput.HighEmphasis = true;
-      this.btnInput.Icon = null;
-      this.btnInput.Location = new System.Drawing.Point(457, 290);
-      this.btnInput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-      this.btnInput.MouseState = MaterialSkin.MouseState.HOVER;
-      this.btnInput.Name = "btnInput";
-      this.btnInput.Size = new System.Drawing.Size(64, 36);
-      this.btnInput.TabIndex = 2;
-      this.btnInput.Text = "Input";
-      this.btnInput.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-      this.btnInput.UseAccentColor = false;
-      this.btnInput.UseVisualStyleBackColor = true;
-      this.btnInput.Click += new System.EventHandler(this.btnInput_Click);
-      // 
-      // prbPInt
-      // 
-      this.prbPInt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.prbPInt.Depth = 0;
-      this.prbPInt.Location = new System.Drawing.Point(527, 6);
-      this.prbPInt.MouseState = MaterialSkin.MouseState.HOVER;
-      this.prbPInt.Name = "prbPInt";
-      this.prbPInt.Size = new System.Drawing.Size(200, 5);
-      this.prbPInt.TabIndex = 3;
-      // 
-      // labPStr
-      // 
-      this.labPStr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.labPStr.Depth = 0;
-      this.labPStr.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-      this.labPStr.Location = new System.Drawing.Point(527, 14);
-      this.labPStr.MouseState = MaterialSkin.MouseState.HOVER;
-      this.labPStr.Name = "labPStr";
-      this.labPStr.Size = new System.Drawing.Size(200, 23);
-      this.labPStr.TabIndex = 4;
-      this.labPStr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      // 
-      // lsvPList
-      // 
-      this.lsvPList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.lsvPList.AutoSizeTable = false;
-      this.lsvPList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.lsvPList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.lsvPList.Depth = 0;
-      this.lsvPList.FullRowSelect = true;
-      this.lsvPList.HideSelection = false;
-      this.lsvPList.Location = new System.Drawing.Point(527, 40);
-      this.lsvPList.MinimumSize = new System.Drawing.Size(200, 100);
-      this.lsvPList.MouseLocation = new System.Drawing.Point(-1, -1);
-      this.lsvPList.MouseState = MaterialSkin.MouseState.OUT;
-      this.lsvPList.Name = "lsvPList";
-      this.lsvPList.OwnerDraw = true;
-      this.lsvPList.Size = new System.Drawing.Size(200, 289);
-      this.lsvPList.TabIndex = 5;
-      this.lsvPList.UseCompatibleStateImageBehavior = false;
-      this.lsvPList.View = System.Windows.Forms.View.Details;
-      // 
-      // tpgLog
-      // 
-      this.tpgLog.Controls.Add(this.lsvPList);
-      this.tpgLog.Controls.Add(this.labPStr);
-      this.tpgLog.Controls.Add(this.prbPInt);
-      this.tpgLog.Controls.Add(this.btnInput);
-      this.tpgLog.Controls.Add(this.tbInput);
-      this.tpgLog.Controls.Add(this.tbOutput);
-      this.tpgLog.Location = new System.Drawing.Point(4, 24);
-      this.tpgLog.Name = "tpgLog";
-      this.tpgLog.Padding = new System.Windows.Forms.Padding(3);
-      this.tpgLog.Size = new System.Drawing.Size(730, 335);
-      this.tpgLog.TabIndex = 0;
-      this.tpgLog.Text = "Log";
-      this.tpgLog.UseVisualStyleBackColor = true;
-      this.tpgLog.Click += new System.EventHandler(this.tpgLog_Click);
-      // 
-      // materialButton1
-      // 
-      this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-      this.materialButton1.Depth = 0;
-      this.materialButton1.HighEmphasis = true;
-      this.materialButton1.Icon = null;
-      this.materialButton1.Location = new System.Drawing.Point(231, 102);
-      this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-      this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-      this.materialButton1.Name = "materialButton1";
-      this.materialButton1.Size = new System.Drawing.Size(158, 36);
-      this.materialButton1.TabIndex = 0;
-      this.materialButton1.Text = "materialButton1";
-      this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-      this.materialButton1.UseAccentColor = false;
-      this.materialButton1.UseVisualStyleBackColor = true;
+      this.sliMaxRam.Depth = 0;
+      this.sliMaxRam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+      this.sliMaxRam.Location = new System.Drawing.Point(170, 6);
+      this.sliMaxRam.MouseState = MaterialSkin.MouseState.HOVER;
+      this.sliMaxRam.Name = "sliMaxRam";
+      this.sliMaxRam.Size = new System.Drawing.Size(227, 40);
+      this.sliMaxRam.TabIndex = 2;
+      this.sliMaxRam.Text = "Max Ram";
       // 
       // Main
       // 
@@ -258,10 +283,9 @@
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "MSL 2.0";
       this.tabControl.ResumeLayout(false);
-      this.tpgSetting.ResumeLayout(false);
-      this.tpgSetting.PerformLayout();
       this.tpgLog.ResumeLayout(false);
       this.tpgLog.PerformLayout();
+      this.tpgSetting.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -280,7 +304,10 @@
     private MaterialSkin.Controls.MaterialButton btnInput;
     private MaterialSkin.Controls.MaterialTextBox tbInput;
     private MaterialSkin.Controls.MaterialMultiLineTextBox tbOutput;
-    private MaterialSkin.Controls.MaterialButton materialButton1;
+    private System.Windows.Forms.Button btnBukkitFile;
+    private System.Windows.Forms.OpenFileDialog ofd;
+    private MaterialSkin.Controls.MaterialSlider sliMinRam;
+    private MaterialSkin.Controls.MaterialSlider sliMaxRam;
   }
 }
 

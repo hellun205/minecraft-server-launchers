@@ -1,4 +1,3 @@
-D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.csproj.AssemblyReference.cache
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.csproj.GenerateResource.cache
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.GeneratedMSBuildEditorConfig.editorconfig
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.AssemblyInfoInputs.cache
@@ -14,7 +13,11 @@ D:\dev\csharp\minecraft-server-launchers\bin\Debug\net5.0-windows\msl_v2.dll
 D:\dev\csharp\minecraft-server-launchers\bin\Debug\net5.0-windows\ref\msl_v2.dll
 D:\dev\csharp\minecraft-server-launchers\bin\Debug\net5.0-windows\msl_v2.pdb
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\msl_v2.g.resources
-D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.csproj.Fody.CopyLocal.cache
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\msl_v2.dll
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\ref\msl_v2.dll
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\msl_v2.pdb
+D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft_server_launchers.Properties.Resources.resources
+D:\dev\csharp\minecraft-server-launchers\bin\Debug\net5.0-windows\MaterialSkin.dll
+D:\dev\csharp\minecraft-server-launchers\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+D:\dev\csharp\minecraft-server-launchers\bin\Debug\net5.0-windows\infobox.dll
+D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.csproj.CopyComplete
