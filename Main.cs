@@ -96,7 +96,7 @@ namespace minecraft_server_launchers
         btnBukkitFile.Text = fileInfo[0].Name;
       }
       sliMaxRam.RangeMax = Ram.GetTotalGB;
-      sliMinRam.RangeMax = Ram.GetTotalGB;
+      sliMinRam.RangeMax = Math.Max(1, sliMaxRam.Value);
     }
 
     private void sliMaxRam_onValueChanged(object sender, int newValue)

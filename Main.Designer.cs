@@ -226,7 +226,7 @@
       this.sliMinRam.Size = new System.Drawing.Size(227, 40);
       this.sliMinRam.TabIndex = 1;
       this.sliMinRam.Text = "Min Ram (GB)";
-      this.sliMinRam.Value = 2;
+      this.sliMinRam.Value = 1;
       this.sliMinRam.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.sliMinRam_onValueChanged);
       // 
       // btnBukkitFile
