@@ -37,12 +37,12 @@
       this.tbInput = new MaterialSkin.Controls.MaterialTextBox();
       this.tbOutput = new MaterialSkin.Controls.MaterialMultiLineTextBox();
       this.tpgSetting = new System.Windows.Forms.TabPage();
+      this.sliMaxRam = new MaterialSkin.Controls.MaterialSlider();
+      this.sliMinRam = new MaterialSkin.Controls.MaterialSlider();
       this.btnBukkitFile = new System.Windows.Forms.Button();
       this.tabSelector = new MaterialSkin.Controls.MaterialTabSelector();
       this.btnStart = new MaterialSkin.Controls.MaterialButton();
       this.ofd = new System.Windows.Forms.OpenFileDialog();
-      this.sliMinRam = new MaterialSkin.Controls.MaterialSlider();
-      this.sliMaxRam = new MaterialSkin.Controls.MaterialSlider();
       this.tabControl.SuspendLayout();
       this.tpgLog.SuspendLayout();
       this.tpgSetting.SuspendLayout();
@@ -198,6 +198,37 @@
       this.tpgSetting.Text = "Setting";
       this.tpgSetting.UseVisualStyleBackColor = true;
       // 
+      // sliMaxRam
+      // 
+      this.sliMaxRam.Depth = 0;
+      this.sliMaxRam.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+      this.sliMaxRam.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
+      this.sliMaxRam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+      this.sliMaxRam.Location = new System.Drawing.Point(112, 11);
+      this.sliMaxRam.MouseState = MaterialSkin.MouseState.HOVER;
+      this.sliMaxRam.Name = "sliMaxRam";
+      this.sliMaxRam.RangeMin = 1;
+      this.sliMaxRam.Size = new System.Drawing.Size(227, 40);
+      this.sliMaxRam.TabIndex = 2;
+      this.sliMaxRam.Text = "Max Ram (GB)";
+      this.sliMaxRam.Value = 1;
+      this.sliMaxRam.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.sliMaxRam_onValueChanged);
+      // 
+      // sliMinRam
+      // 
+      this.sliMinRam.Depth = 0;
+      this.sliMinRam.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+      this.sliMinRam.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
+      this.sliMinRam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+      this.sliMinRam.Location = new System.Drawing.Point(112, 57);
+      this.sliMinRam.MouseState = MaterialSkin.MouseState.HOVER;
+      this.sliMinRam.Name = "sliMinRam";
+      this.sliMinRam.Size = new System.Drawing.Size(227, 40);
+      this.sliMinRam.TabIndex = 1;
+      this.sliMinRam.Text = "Min Ram (GB)";
+      this.sliMinRam.Value = 2;
+      this.sliMinRam.onValueChanged += new MaterialSkin.Controls.MaterialSlider.ValueChanged(this.sliMinRam_onValueChanged);
+      // 
       // btnBukkitFile
       // 
       this.btnBukkitFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -248,28 +279,6 @@
       // 
       this.ofd.FileName = "openFileDialog1";
       // 
-      // sliMinRam
-      // 
-      this.sliMinRam.Depth = 0;
-      this.sliMinRam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-      this.sliMinRam.Location = new System.Drawing.Point(170, 52);
-      this.sliMinRam.MouseState = MaterialSkin.MouseState.HOVER;
-      this.sliMinRam.Name = "sliMinRam";
-      this.sliMinRam.Size = new System.Drawing.Size(227, 40);
-      this.sliMinRam.TabIndex = 1;
-      this.sliMinRam.Text = "Min Ram";
-      // 
-      // sliMaxRam
-      // 
-      this.sliMaxRam.Depth = 0;
-      this.sliMaxRam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-      this.sliMaxRam.Location = new System.Drawing.Point(170, 6);
-      this.sliMaxRam.MouseState = MaterialSkin.MouseState.HOVER;
-      this.sliMaxRam.Name = "sliMaxRam";
-      this.sliMaxRam.Size = new System.Drawing.Size(227, 40);
-      this.sliMaxRam.TabIndex = 2;
-      this.sliMaxRam.Text = "Max Ram";
-      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -282,6 +291,7 @@
       this.Name = "Main";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "MSL 2.0";
+      this.Load += new System.EventHandler(this.Main_Load);
       this.tabControl.ResumeLayout(false);
       this.tpgLog.ResumeLayout(false);
       this.tpgLog.PerformLayout();

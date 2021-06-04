@@ -1,43 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualBasic.Devices;
+using System;
 
 namespace minecraft_server_launchers
 {
-  [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-  public class MEMORYSTATUSEX
+  static class Ram
   {
-    public uint dwLength;
-    public uint dwMemoryLoad;
-    public ulong ullTotalPhys;
-    public ulong ullAvailPhys;
-    public ulong ullTotalPageFile;
-    public ulong ullAvailPageFile;
-    public ulong ullTotalVirtual;
-    public ulong ullAvailVirtual;
-    public ulong ullAvailExtendedVirtual;
-    public MEMORYSTATUSEX() => this.dwLength = (uint)Marshal.SizeOf(typeof(NativeMethods.MEMORYSTATUSEX));
-
-
-    
-  }
-  public static class Ram
-  {
-    public static int GetMemory
-    {
-      get
-      {
-        [return: MarshalAs(UnmanagedType.Bool)]
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern bool GlobalMemoryStatusEx([In, Out] MEMORYSTATUSEX lpBuffer);
-        MEMORYSTATUSEX memStatus = new MEMORYSTATUSEX();
-        if (GlobalMemoryStatusEx(memStatus))
-          return (int)(memStatus.ullTotalPhys/ 1024/1024);
-        else return 0;
-      }
-    }
+    public static int GetTotalGB => Convert.ToInt32((new ComputerInfo().TotalPhysicalMemory / (Math.Pow(1024, 3))) + 0.5);
   }
 }

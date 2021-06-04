@@ -3,6 +3,7 @@ using MaterialSkin.Controls;
 using System;
 using System.IO;
 using System.Drawing;
+using Microsoft.VisualBasic.Devices;
 
 namespace minecraft_server_launchers
 {
@@ -61,6 +62,8 @@ namespace minecraft_server_launchers
 
     private void btnStart_Click(object sender, EventArgs e)
     {
+      Server.MaxRam = Math.Max(1, sliMaxRam.Value);
+      Server.MinRam = Math.Min(1, sliMinRam.Value);
       Server.Start();
     }
 
@@ -83,7 +86,6 @@ namespace minecraft_server_launchers
     {
 
     }
-
     private void Loads()
     {
       if (!Directory.Exists("./server")) Directory.CreateDirectory("./server");
@@ -93,8 +95,28 @@ namespace minecraft_server_launchers
         btnBukkitFile.Image = Icon.ExtractAssociatedIcon(fileInfo[0].FullName).ToBitmap();
         btnBukkitFile.Text = fileInfo[0].Name;
       }
-      sliMaxRam.RangeMax = ram;
-      sliMinRam.RangeMax = ram;
+      sliMaxRam.RangeMax = Ram.GetTotalGB;
+      sliMinRam.RangeMax = Ram.GetTotalGB;
+    }
+
+    private void sliMaxRam_onValueChanged(object sender, int newValue)
+    {
+      if (newValue == 0)
+        sliMinRam.Value = 1;
+      sliMinRam.RangeMax = Math.Max(1, newValue);
+      if (sliMinRam.Value > sliMinRam.RangeMax)
+        sliMinRam.Value = sliMinRam.RangeMax;
+    }
+
+    private void Main_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void sliMinRam_onValueChanged(object sender, int newValue)
+    {
+      if (newValue == 0)
+        sliMinRam.Value = 1;
     }
   }
 }
