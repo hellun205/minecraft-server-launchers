@@ -43,6 +43,7 @@
       this.tabSelector = new MaterialSkin.Controls.MaterialTabSelector();
       this.btnStart = new MaterialSkin.Controls.MaterialButton();
       this.ofd = new System.Windows.Forms.OpenFileDialog();
+      this.pnFileEditor = new System.Windows.Forms.Panel();
       this.tabControl.SuspendLayout();
       this.tpgLog.SuspendLayout();
       this.tpgSetting.SuspendLayout();
@@ -187,6 +188,7 @@
       // 
       // tpgSetting
       // 
+      this.tpgSetting.Controls.Add(this.pnFileEditor);
       this.tpgSetting.Controls.Add(this.sliMaxRam);
       this.tpgSetting.Controls.Add(this.sliMinRam);
       this.tpgSetting.Controls.Add(this.btnBukkitFile);
@@ -279,6 +281,15 @@
       // 
       this.ofd.FileName = "openFileDialog1";
       // 
+      // pnFileEditor
+      // 
+      this.pnFileEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.pnFileEditor.Location = new System.Drawing.Point(345, 11);
+      this.pnFileEditor.Name = "pnFileEditor";
+      this.pnFileEditor.Size = new System.Drawing.Size(379, 318);
+      this.pnFileEditor.TabIndex = 3;
+      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -318,6 +329,7 @@
     private System.Windows.Forms.OpenFileDialog ofd;
     private MaterialSkin.Controls.MaterialSlider sliMinRam;
     private MaterialSkin.Controls.MaterialSlider sliMaxRam;
+    private System.Windows.Forms.Panel pnFileEditor;
   }
 }
 

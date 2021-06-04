@@ -15,7 +15,7 @@ namespace minecraft_server_launchers
       InitializeComponent();
     }
 
-    public EditFileItem(string path)
+    public EditFileItem(string path) : this()
     {
       if (File.Exists(path))
       {

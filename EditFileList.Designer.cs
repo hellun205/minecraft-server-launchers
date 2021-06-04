@@ -31,14 +31,15 @@ namespace minecraft_server_launchers
     {
       this.SuspendLayout();
       // 
-      // EditFiles
+      // EditFileList
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
       this.AutoScroll = true;
       this.BackColor = System.Drawing.Color.Transparent;
-      this.Name = "EditFiles";
-      this.Size = new System.Drawing.Size(664, 563);
+      this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.Name = "EditFileList";
+      this.Size = new System.Drawing.Size(433, 407);
+      this.Resize += new System.EventHandler(this.EditFileList_Resize);
       this.ResumeLayout(false);
 
     }
