@@ -3,9 +3,13 @@ using System.Diagnostics;
 
 namespace minecraft_server_launchers
 {
+  public delegate void OnStarted();
+  public delegate void OnExited();
+  public delegate void OnOutput();
   public class Server
   {
     private Process process = new Process();
+    public string WorkingDirectory { get; set; }
     public int MaxRam { get; set; }
     public int MinRam { get; set; }
     public string BukkitPath { get; set; }
@@ -13,9 +17,9 @@ namespace minecraft_server_launchers
 
     public bool IsOnline = false;
 
-    public Action OnStarted = () => { };
-    public Action OnExited = () => { };
-    public Action OnOutput = () => { };
+    public event OnStarted OnStarted;
+    public event OnExited OnExited;
+    public event OnOutput OnOutput;
 
     public void Start()
     {
@@ -33,7 +37,8 @@ namespace minecraft_server_launchers
     private void ExecuteServ()
     {
       process.StartInfo.FileName = "java.exe";
-      process.StartInfo.Arguments = $"-Djline.terminal=jline.UnsupportedTerminal -Xmx{MaxRam}G -Xms{MinRam}G - jar \"{BukkitPath}\" nogui";
+      process.StartInfo.Arguments = $"-Djline.terminal=jline.UnsupportedTerminal -Xmx{MaxRam}G -Xms{MinRam}G -jar \"{BukkitPath}\" nogui";
+      process.StartInfo.WorkingDirectory = WorkingDirectory;
       process.StartInfo.CreateNoWindow = true;
       process.StartInfo.UseShellExecute = false;
       process.StartInfo.RedirectStandardOutput = true;

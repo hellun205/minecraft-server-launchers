@@ -3,7 +3,7 @@ using MaterialSkin.Controls;
 using System;
 using System.IO;
 using System.Drawing;
-using Microsoft.VisualBasic.Devices;
+using System.Windows.Forms;
 
 namespace minecraft_server_launchers
 {
@@ -23,19 +23,37 @@ namespace minecraft_server_launchers
       msm.Theme = MaterialSkinManager.Themes.DARK;
       ChangeColor("blue");
 
-      Server.OnOutput = () =>
-      {
-        tbOutput.AppendText($"\n{Server.Data}");
-      };
-      Server.OnStarted = () =>
-      {
-        ChangeColor("green");
-      };
-      Server.OnExited = () =>
-      {
-        ChangeColor("blue");
-      };
+      Server.OnOutput += Server_OnOutput;
+      Server.OnStarted += Server_OnStarted;
+      Server.OnExited += Server_OnExited;
       Loads();
+    }
+
+    private void Server_OnOutput()
+    {
+      tbOutput.Invoke((MethodInvoker)delegate ()
+     {
+       tbOutput.AppendText($"\n{Server.Data}");
+     });
+    }
+
+    private void Server_OnStarted()
+    {
+      //ChangeColor("green");
+      btnStart.Invoke((MethodInvoker)delegate ()
+      {
+        btnStart.Enabled = false;
+      });
+    }
+
+    private void Server_OnExited()
+    {
+      //ChangeColor("blue");
+      btnStart.Invoke((MethodInvoker)delegate ()
+      {
+        btnStart.Enabled = true;
+      });
+
     }
 
     private void ChangeColor(string colorS = "blue-gray")
@@ -60,6 +78,7 @@ namespace minecraft_server_launchers
           cs = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
           break;
       }
+
       msm.ColorScheme = cs;
     }
 
@@ -104,7 +123,7 @@ namespace minecraft_server_launchers
       sliMaxRam.RangeMax = Ram.GetTotalGB;
       sliMinRam.RangeMax = Math.Max(1, sliMaxRam.Value);
 
-      editFiles = new(path, new string[] { "*.yml", "*.json", "*.properties" , "*.txt"});
+      editFiles = new(path, new string[] { "*.yml", "*.json", "*.properties", "*.txt" });
       editFiles.Dock = System.Windows.Forms.DockStyle.Fill;
       pnFileEditor.Controls.Add(editFiles);
     }
