@@ -1,33 +1,33 @@
 ﻿namespace minecraft_server_launchers
 {
-    partial class Main
+  partial class Main
+  {
+    /// <summary>
+    ///  Required designer variable.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
+
+    /// <summary>
+    ///  Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      base.Dispose(disposing);
+    }
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+    #region Windows Form Designer generated code
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+    /// <summary>
+    ///  Required method for Designer support - do not modify
+    ///  the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
       this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
       this.tpgLog = new System.Windows.Forms.TabPage();
       this.lsvPList = new MaterialSkin.Controls.MaterialListView();
@@ -46,6 +46,7 @@
       this.tabSelector = new MaterialSkin.Controls.MaterialTabSelector();
       this.btnStart = new MaterialSkin.Controls.MaterialButton();
       this.ofd = new System.Windows.Forms.OpenFileDialog();
+      this.lbServerStatus = new System.Windows.Forms.Label();
       this.tabControl.SuspendLayout();
       this.tpgLog.SuspendLayout();
       this.tpgSetting.SuspendLayout();
@@ -59,14 +60,13 @@
       this.tabControl.Controls.Add(this.tpgLog);
       this.tabControl.Controls.Add(this.tpgSetting);
       this.tabControl.Depth = 0;
-      this.tabControl.Location = new System.Drawing.Point(6, 70);
+      this.tabControl.Location = new System.Drawing.Point(6, 68);
       this.tabControl.MouseState = MaterialSkin.MouseState.HOVER;
       this.tabControl.Multiline = true;
       this.tabControl.Name = "tabControl";
       this.tabControl.SelectedIndex = 0;
-      this.tabControl.Size = new System.Drawing.Size(738, 363);
+      this.tabControl.Size = new System.Drawing.Size(738, 365);
       this.tabControl.TabIndex = 0;
-      this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
       // 
       // tpgLog
       // 
@@ -79,11 +79,10 @@
       this.tpgLog.Location = new System.Drawing.Point(4, 24);
       this.tpgLog.Name = "tpgLog";
       this.tpgLog.Padding = new System.Windows.Forms.Padding(3);
-      this.tpgLog.Size = new System.Drawing.Size(730, 335);
+      this.tpgLog.Size = new System.Drawing.Size(730, 337);
       this.tpgLog.TabIndex = 0;
       this.tpgLog.Text = "Log";
       this.tpgLog.UseVisualStyleBackColor = true;
-      this.tpgLog.Click += new System.EventHandler(this.tpgLog_Click);
       // 
       // lsvPList
       // 
@@ -101,7 +100,7 @@
       this.lsvPList.MouseState = MaterialSkin.MouseState.OUT;
       this.lsvPList.Name = "lsvPList";
       this.lsvPList.OwnerDraw = true;
-      this.lsvPList.Size = new System.Drawing.Size(200, 289);
+      this.lsvPList.Size = new System.Drawing.Size(200, 291);
       this.lsvPList.TabIndex = 5;
       this.lsvPList.UseCompatibleStateImageBehavior = false;
       this.lsvPList.View = System.Windows.Forms.View.Details;
@@ -136,7 +135,7 @@
       this.btnInput.Depth = 0;
       this.btnInput.HighEmphasis = true;
       this.btnInput.Icon = null;
-      this.btnInput.Location = new System.Drawing.Point(457, 290);
+      this.btnInput.Location = new System.Drawing.Point(457, 292);
       this.btnInput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
       this.btnInput.MouseState = MaterialSkin.MouseState.HOVER;
       this.btnInput.Name = "btnInput";
@@ -157,7 +156,7 @@
       this.tbInput.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
       this.tbInput.Hint = "Input command...";
       this.tbInput.LeadingIcon = null;
-      this.tbInput.Location = new System.Drawing.Point(3, 290);
+      this.tbInput.Location = new System.Drawing.Point(3, 292);
       this.tbInput.MaxLength = 50;
       this.tbInput.MouseState = MaterialSkin.MouseState.OUT;
       this.tbInput.Multiline = false;
@@ -167,7 +166,7 @@
       this.tbInput.Text = "";
       this.tbInput.TrailingIcon = null;
       this.tbInput.UseTallSize = false;
-      this.tbInput.TextChanged += new System.EventHandler(this.tbInput_TextChanged);
+      this.tbInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbInput_KeyPress);
       // 
       // tbOutput
       // 
@@ -179,12 +178,13 @@
       this.tbOutput.Depth = 0;
       this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
       this.tbOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+      this.tbOutput.HideSelection = false;
       this.tbOutput.Location = new System.Drawing.Point(3, 3);
       this.tbOutput.MouseState = MaterialSkin.MouseState.HOVER;
       this.tbOutput.Name = "tbOutput";
       this.tbOutput.ReadOnly = true;
       this.tbOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-      this.tbOutput.Size = new System.Drawing.Size(518, 281);
+      this.tbOutput.Size = new System.Drawing.Size(518, 283);
       this.tbOutput.TabIndex = 0;
       this.tbOutput.Text = "";
       // 
@@ -199,7 +199,7 @@
       this.tpgSetting.Location = new System.Drawing.Point(4, 24);
       this.tpgSetting.Name = "tpgSetting";
       this.tpgSetting.Padding = new System.Windows.Forms.Padding(3);
-      this.tpgSetting.Size = new System.Drawing.Size(730, 335);
+      this.tpgSetting.Size = new System.Drawing.Size(730, 337);
       this.tpgSetting.TabIndex = 1;
       this.tpgSetting.Text = "Setting";
       this.tpgSetting.UseVisualStyleBackColor = true;
@@ -296,29 +296,30 @@
       this.tabSelector.BaseTabControl = this.tabControl;
       this.tabSelector.Depth = 0;
       this.tabSelector.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-      this.tabSelector.Location = new System.Drawing.Point(171, 27);
+      this.tabSelector.Location = new System.Drawing.Point(205, 27);
       this.tabSelector.MouseState = MaterialSkin.MouseState.HOVER;
       this.tabSelector.Name = "tabSelector";
       this.tabSelector.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.tabSelector.Size = new System.Drawing.Size(578, 35);
+      this.tabSelector.Size = new System.Drawing.Size(544, 35);
       this.tabSelector.TabIndex = 1;
       this.tabSelector.TabIndicatorHeight = 3;
       // 
       // btnStart
       // 
+      this.btnStart.AutoSize = false;
       this.btnStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.btnStart.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
       this.btnStart.Depth = 0;
       this.btnStart.HighEmphasis = true;
       this.btnStart.Icon = null;
-      this.btnStart.Location = new System.Drawing.Point(97, 26);
+      this.btnStart.Location = new System.Drawing.Point(110, 26);
       this.btnStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
       this.btnStart.MouseState = MaterialSkin.MouseState.HOVER;
       this.btnStart.Name = "btnStart";
-      this.btnStart.Size = new System.Drawing.Size(67, 36);
+      this.btnStart.Size = new System.Drawing.Size(88, 36);
       this.btnStart.TabIndex = 0;
       this.btnStart.Text = "Start";
-      this.btnStart.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+      this.btnStart.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
       this.btnStart.UseAccentColor = false;
       this.btnStart.UseVisualStyleBackColor = true;
       this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -327,11 +328,25 @@
       // 
       this.ofd.FileName = "openFileDialog1";
       // 
+      // lbServerStatus
+      // 
+      this.lbServerStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.lbServerStatus.BackColor = System.Drawing.Color.Transparent;
+      this.lbServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.lbServerStatus.ForeColor = System.Drawing.Color.Red;
+      this.lbServerStatus.Location = new System.Drawing.Point(628, 3);
+      this.lbServerStatus.Name = "lbServerStatus";
+      this.lbServerStatus.Size = new System.Drawing.Size(44, 18);
+      this.lbServerStatus.TabIndex = 2;
+      this.lbServerStatus.Text = "OFF";
+      this.lbServerStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(750, 430);
+      this.Controls.Add(this.lbServerStatus);
       this.Controls.Add(this.btnStart);
       this.Controls.Add(this.tabSelector);
       this.Controls.Add(this.tabControl);
@@ -339,15 +354,13 @@
       this.Name = "Main";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "MSL 2.0";
-      this.Load += new System.EventHandler(this.Main_Load);
       this.tabControl.ResumeLayout(false);
       this.tpgLog.ResumeLayout(false);
       this.tpgLog.PerformLayout();
       this.tpgSetting.ResumeLayout(false);
       this.ResumeLayout(false);
-      this.PerformLayout();
 
-        }
+    }
 
     #endregion
 
@@ -369,6 +382,7 @@
     private System.Windows.Forms.Panel pnFileEditor;
     private MaterialSkin.Controls.MaterialLabel labFileEditorTitle;
     private MaterialSkin.Controls.MaterialButton btnFileEditorRefresh;
+    private System.Windows.Forms.Label lbServerStatus;
   }
 }
 

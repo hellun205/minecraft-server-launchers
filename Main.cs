@@ -12,48 +12,46 @@ namespace minecraft_server_launchers
     private static MaterialSkinManager msm = MaterialSkinManager.Instance;
     public Server Server = new();
     private string bukkitPath;
+    private string serverPath = "./server/";
 
     private EditFileList editFiles;
 
     public Main()
     {
       InitializeComponent();
+      CheckForIllegalCrossThreadCalls = false;
 
       msm.AddFormToManage(this);
       msm.Theme = MaterialSkinManager.Themes.DARK;
-      ChangeColor("blue");
+      //ChangeColor("blue");
 
       Server.OnOutput += Server_OnOutput;
       Server.OnStarted += Server_OnStarted;
       Server.OnExited += Server_OnExited;
       Loads();
+      lbServerStatus.BackColor = Color.FromArgb(48, 63, 159);
+      lbServerStatus.ForeColor = Color.Red;
     }
 
     private void Server_OnOutput()
     {
-      tbOutput.Invoke((MethodInvoker)delegate ()
-     {
-       tbOutput.AppendText($"\n{Server.Data}");
-     });
+      tbOutput.AppendText($"\n{Server.Data}");
     }
 
     private void Server_OnStarted()
     {
       //ChangeColor("green");
-      btnStart.Invoke((MethodInvoker)delegate ()
-      {
-        btnStart.Enabled = false;
-      });
+      btnStart.Enabled = false;
+      lbServerStatus.ForeColor = Color.LimeGreen;
+      lbServerStatus.Text = "ON";
     }
 
     private void Server_OnExited()
     {
       //ChangeColor("blue");
-      btnStart.Invoke((MethodInvoker)delegate ()
-      {
-        btnStart.Enabled = true;
-      });
-
+      btnStart.Enabled = true;
+      lbServerStatus.ForeColor = Color.Red;
+      lbServerStatus.Text = "OFF";
     }
 
     private void ChangeColor(string colorS = "blue-gray")
@@ -62,7 +60,7 @@ namespace minecraft_server_launchers
       switch (colorS)
       {
         case "blue":
-          cs = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.LightBlue200, TextShade.WHITE);
+          cs = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue400, Accent.LightBlue200, TextShade.WHITE);
           break;
         case "green":
           cs = new ColorScheme(Primary.Green800, Primary.Green900, Primary.Green500, Accent.LightGreen200, TextShade.WHITE);
@@ -87,33 +85,20 @@ namespace minecraft_server_launchers
       Server.BukkitPath = bukkitPath;
       Server.MaxRam = Math.Max(1, sliMaxRam.Value);
       Server.MinRam = Math.Min(1, sliMinRam.Value);
+      Server.WorkingDirectory = serverPath;
       Server.Start();
     }
 
     private void btnInput_Click(object sender, EventArgs e)
     {
-
+      OnInput();
     }
 
-    private void tbInput_TextChanged(object sender, EventArgs e)
-    {
 
-    }
-
-    private void tpgLog_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
     private void Loads()
     {
-      var path = "./server";
-      if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-      var fileInfo = new DirectoryInfo(path).GetFiles("*.jar");
+      if (!Directory.Exists(serverPath)) Directory.CreateDirectory(serverPath);
+      var fileInfo = new DirectoryInfo(serverPath).GetFiles("*.jar");
       if (fileInfo.Length > 0)
       {
         btnBukkitFile.Image = Icon.ExtractAssociatedIcon(fileInfo[0].FullName).ToBitmap();
@@ -123,7 +108,7 @@ namespace minecraft_server_launchers
       sliMaxRam.RangeMax = Ram.GetTotalGB;
       sliMinRam.RangeMax = Math.Max(1, sliMaxRam.Value);
 
-      editFiles = new(path, new string[] { "*.yml", "*.json", "*.properties", "*.txt" });
+      editFiles = new(serverPath, new string[] { "*.yml", "*.json", "*.properties", "*.txt" });
       editFiles.Dock = System.Windows.Forms.DockStyle.Fill;
       pnFileEditor.Controls.Add(editFiles);
     }
@@ -137,11 +122,6 @@ namespace minecraft_server_launchers
         sliMinRam.Value = sliMinRam.RangeMax;
     }
 
-    private void Main_Load(object sender, EventArgs e)
-    {
-
-    }
-
     private void sliMinRam_onValueChanged(object sender, int newValue)
     {
       if (newValue == 0)
@@ -151,6 +131,21 @@ namespace minecraft_server_launchers
     private void btnFileEditorRefresh_Click(object sender, EventArgs e)
     {
       editFiles.Refresh_();
+    }
+
+    private void tbInput_KeyPress(object sender, KeyPressEventArgs e)
+    {
+      if (e.KeyChar == 13)
+      {
+        OnInput();
+        e.Handled = true;
+      }
+    }
+
+    private void OnInput()
+    {
+      Server.Input(tbInput.Text);
+      tbInput.Clear();
     }
   }
 }

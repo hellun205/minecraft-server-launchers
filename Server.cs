@@ -53,6 +53,7 @@ namespace minecraft_server_launchers
       process.EnableRaisingEvents = true;
       process.BeginErrorReadLine();
       process.BeginOutputReadLine();
+      IsOnline = true;
       OnStarted();
     }
 
@@ -77,6 +78,7 @@ namespace minecraft_server_launchers
       process.Kill();
       process.Dispose();
       process = new Process();
+      IsOnline = false;
       OnExited();
     }
 
