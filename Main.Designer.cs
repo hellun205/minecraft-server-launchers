@@ -37,13 +37,15 @@
       this.tbInput = new MaterialSkin.Controls.MaterialTextBox();
       this.tbOutput = new MaterialSkin.Controls.MaterialMultiLineTextBox();
       this.tpgSetting = new System.Windows.Forms.TabPage();
+      this.labFileEditorTitle = new MaterialSkin.Controls.MaterialLabel();
+      this.btnFileEditorRefresh = new MaterialSkin.Controls.MaterialButton();
+      this.pnFileEditor = new System.Windows.Forms.Panel();
       this.sliMaxRam = new MaterialSkin.Controls.MaterialSlider();
       this.sliMinRam = new MaterialSkin.Controls.MaterialSlider();
       this.btnBukkitFile = new System.Windows.Forms.Button();
       this.tabSelector = new MaterialSkin.Controls.MaterialTabSelector();
       this.btnStart = new MaterialSkin.Controls.MaterialButton();
       this.ofd = new System.Windows.Forms.OpenFileDialog();
-      this.pnFileEditor = new System.Windows.Forms.Panel();
       this.tabControl.SuspendLayout();
       this.tpgLog.SuspendLayout();
       this.tpgSetting.SuspendLayout();
@@ -188,6 +190,8 @@
       // 
       // tpgSetting
       // 
+      this.tpgSetting.Controls.Add(this.labFileEditorTitle);
+      this.tpgSetting.Controls.Add(this.btnFileEditorRefresh);
       this.tpgSetting.Controls.Add(this.pnFileEditor);
       this.tpgSetting.Controls.Add(this.sliMaxRam);
       this.tpgSetting.Controls.Add(this.sliMinRam);
@@ -199,6 +203,48 @@
       this.tpgSetting.TabIndex = 1;
       this.tpgSetting.Text = "Setting";
       this.tpgSetting.UseVisualStyleBackColor = true;
+      // 
+      // labFileEditorTitle
+      // 
+      this.labFileEditorTitle.Depth = 0;
+      this.labFileEditorTitle.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+      this.labFileEditorTitle.Location = new System.Drawing.Point(345, 6);
+      this.labFileEditorTitle.MouseState = MaterialSkin.MouseState.HOVER;
+      this.labFileEditorTitle.Name = "labFileEditorTitle";
+      this.labFileEditorTitle.Size = new System.Drawing.Size(296, 23);
+      this.labFileEditorTitle.TabIndex = 5;
+      this.labFileEditorTitle.Text = "File Editor";
+      // 
+      // btnFileEditorRefresh
+      // 
+      this.btnFileEditorRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.btnFileEditorRefresh.AutoSize = false;
+      this.btnFileEditorRefresh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.btnFileEditorRefresh.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+      this.btnFileEditorRefresh.Depth = 0;
+      this.btnFileEditorRefresh.HighEmphasis = true;
+      this.btnFileEditorRefresh.Icon = null;
+      this.btnFileEditorRefresh.Location = new System.Drawing.Point(648, 6);
+      this.btnFileEditorRefresh.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+      this.btnFileEditorRefresh.MouseState = MaterialSkin.MouseState.HOVER;
+      this.btnFileEditorRefresh.Name = "btnFileEditorRefresh";
+      this.btnFileEditorRefresh.Size = new System.Drawing.Size(75, 23);
+      this.btnFileEditorRefresh.TabIndex = 4;
+      this.btnFileEditorRefresh.Text = "Refresh";
+      this.btnFileEditorRefresh.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+      this.btnFileEditorRefresh.UseAccentColor = false;
+      this.btnFileEditorRefresh.UseVisualStyleBackColor = true;
+      this.btnFileEditorRefresh.Click += new System.EventHandler(this.btnFileEditorRefresh_Click);
+      // 
+      // pnFileEditor
+      // 
+      this.pnFileEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.pnFileEditor.Location = new System.Drawing.Point(345, 38);
+      this.pnFileEditor.Name = "pnFileEditor";
+      this.pnFileEditor.Size = new System.Drawing.Size(379, 291);
+      this.pnFileEditor.TabIndex = 3;
       // 
       // sliMaxRam
       // 
@@ -281,15 +327,6 @@
       // 
       this.ofd.FileName = "openFileDialog1";
       // 
-      // pnFileEditor
-      // 
-      this.pnFileEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.pnFileEditor.Location = new System.Drawing.Point(345, 11);
-      this.pnFileEditor.Name = "pnFileEditor";
-      this.pnFileEditor.Size = new System.Drawing.Size(379, 318);
-      this.pnFileEditor.TabIndex = 3;
-      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -330,6 +367,8 @@
     private MaterialSkin.Controls.MaterialSlider sliMinRam;
     private MaterialSkin.Controls.MaterialSlider sliMaxRam;
     private System.Windows.Forms.Panel pnFileEditor;
+    private MaterialSkin.Controls.MaterialLabel labFileEditorTitle;
+    private MaterialSkin.Controls.MaterialButton btnFileEditorRefresh;
   }
 }
 

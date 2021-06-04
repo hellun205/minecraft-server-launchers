@@ -35,6 +35,7 @@ namespace minecraft_server_launchers
       // 
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
       this.AutoScroll = true;
+      this.AutoScrollMargin = new System.Drawing.Size(0, 10);
       this.BackColor = System.Drawing.Color.Transparent;
       this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.Name = "EditFileList";

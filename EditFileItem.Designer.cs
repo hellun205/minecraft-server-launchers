@@ -41,6 +41,7 @@ namespace minecraft_server_launchers
       this.panel.Controls.Add(this.textBox);
       this.panel.Depth = 0;
       this.panel.Description = "";
+      this.panel.ExpandHeight = 311;
       this.panel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
       this.panel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
       this.panel.Location = new System.Drawing.Point(0, 0);
@@ -69,7 +70,7 @@ namespace minecraft_server_launchers
       this.textBox.MouseState = MaterialSkin.MouseState.HOVER;
       this.textBox.Name = "textBox";
       this.textBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-      this.textBox.Size = new System.Drawing.Size(333, 114);
+      this.textBox.Size = new System.Drawing.Size(333, 153);
       this.textBox.TabIndex = 2;
       this.textBox.Text = "";
       // 

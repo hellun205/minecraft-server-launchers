@@ -24,6 +24,46 @@ namespace minecraft_server_launchers
       DirectoryPath = directoryPath;
       foreach (var str in exts)
         Exts.Add(str);
+      Refresh_();
+    }
+
+    private void Add(string path)
+    {
+      Items.Add(new(path));
+      //Items[Items.Count - 1].panel.PanelExpand += OnReLoc_;
+      //Items[Items.Count - 1].panel.PanelCollapse += OnReLoc_;
+      Items[Items.Count - 1].Resize += OnReLoc_;
+      Controls.Add(Items[Items.Count - 1]);
+      OnReLoc();
+    }
+
+    private void OnReLoc_(object sender, EventArgs e)
+    {
+      OnReLoc();
+    }
+    private void OnReLoc()
+    {
+      if (Items.Count > 1)
+        for (var i = 1; i < Items.Count; i++)
+        {
+          Items[i].Top = Items[i - 1].Top + Items[i - 1].Height + 5;
+        }
+    }
+
+    private void EditFileList_Resize(object sender, EventArgs e)
+    {
+      foreach (var item in Items)
+      {
+        item.Width = Width - 22;
+        item.panel.Width = Width - 22;
+        //item.panel.ExpandHeight = (int)((double)Height * 0.3);
+      }
+    }
+    
+    public void Refresh_()
+    {
+      Controls.Clear();
+      Items.Clear();
 
       var dirInfo = new DirectoryInfo(DirectoryPath);
       foreach (var str in Exts)
@@ -34,32 +74,6 @@ namespace minecraft_server_launchers
           Add(file.FullName);
         }
       }
-    }
-
-    private void Add(string path)
-    {
-      Items.Add(new(path));
-      Controls.Add(Items[Items.Count - 1]);
-      //Items[Items.Count - 1].panel.PanelExpand += OnReLoc;
-      //Items[Items.Count - 1].panel.PanelCollapse += OnReLoc;
-      Items[Items.Count - 1].Resize += OnReLoc_;
-      OnReLoc();
-    }
-
-    private void OnReLoc_(object sender, EventArgs e)
-    {
-      OnReLoc();
-    }
-    private void OnReLoc()
-    {
-      for (var i = 1; i > Items.Count; i++)
-        Items[i].Top = Items[i - 1].Top + Items[i - 1].Height;
-    }
-
-    private void EditFileList_Resize(object sender, EventArgs e)
-    {
-      foreach (var item in Items)
-        item.Width = Width;
     }
   }
 }

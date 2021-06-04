@@ -11,6 +11,9 @@ namespace minecraft_server_launchers
   {
     private static MaterialSkinManager msm = MaterialSkinManager.Instance;
     public Server Server = new();
+    private string bukkitPath;
+
+    private EditFileList editFiles;
 
     public Main()
     {
@@ -62,6 +65,7 @@ namespace minecraft_server_launchers
 
     private void btnStart_Click(object sender, EventArgs e)
     {
+      Server.BukkitPath = bukkitPath;
       Server.MaxRam = Math.Max(1, sliMaxRam.Value);
       Server.MinRam = Math.Min(1, sliMinRam.Value);
       Server.Start();
@@ -88,15 +92,21 @@ namespace minecraft_server_launchers
     }
     private void Loads()
     {
-      if (!Directory.Exists("./server")) Directory.CreateDirectory("./server");
-      var fileInfo = new DirectoryInfo("./server").GetFiles("*.jar");
+      var path = "./server";
+      if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+      var fileInfo = new DirectoryInfo(path).GetFiles("*.jar");
       if (fileInfo.Length > 0)
       {
         btnBukkitFile.Image = Icon.ExtractAssociatedIcon(fileInfo[0].FullName).ToBitmap();
         btnBukkitFile.Text = fileInfo[0].Name;
+        bukkitPath = fileInfo[0].FullName;
       }
       sliMaxRam.RangeMax = Ram.GetTotalGB;
       sliMinRam.RangeMax = Math.Max(1, sliMaxRam.Value);
+
+      editFiles = new(path, new string[] { "*.yml", "*.json", "*.properties" , "*.txt"});
+      editFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+      pnFileEditor.Controls.Add(editFiles);
     }
 
     private void sliMaxRam_onValueChanged(object sender, int newValue)
@@ -117,6 +127,11 @@ namespace minecraft_server_launchers
     {
       if (newValue == 0)
         sliMinRam.Value = 1;
+    }
+
+    private void btnFileEditorRefresh_Click(object sender, EventArgs e)
+    {
+      editFiles.Refresh_();
     }
   }
 }

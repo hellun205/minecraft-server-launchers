@@ -20,8 +20,8 @@ namespace minecraft_server_launchers
       if (File.Exists(path))
       {
         var fInfo = new FileInfo(path);
+        Path = path;
         FileName = fInfo.Name;
-        Text = File.ReadAllText(path);
       }
     }
 
