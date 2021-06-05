@@ -15,7 +15,8 @@ namespace minecraft_server_launchers
     private static MaterialSkinManager msm = MaterialSkinManager.Instance;
     public Server Server = new();
     private string bukkitPath;
-    private string serverPath = "./server/";
+    private string serverPath;
+    private string logPath;
     private PerformanceCounter pfcRam = new()
     {
       CategoryName = "Process",
@@ -25,6 +26,7 @@ namespace minecraft_server_launchers
     private double usageRam;
     private int playerCnt;
     private int playerMCnt;
+    private string logName;
 
     private EditFileList editFiles;
 
@@ -32,6 +34,8 @@ namespace minecraft_server_launchers
     {
       InitializeComponent();
       CheckForIllegalCrossThreadCalls = false;
+      serverPath = "./server";
+      logPath = $"{serverPath}/server-logs";
 
       msm.AddFormToManage(this);
       msm.Theme = MaterialSkinManager.Themes.DARK;
@@ -44,7 +48,6 @@ namespace minecraft_server_launchers
       lbServerStatus.BackColor = Color.FromArgb(48, 63, 159);
       lbServerStatus.ForeColor = Color.Red;
 
-      lsvPList.View = View.List;
     }
 
     private void Server_OnOutput(string data)
@@ -102,6 +105,11 @@ namespace minecraft_server_launchers
         var maxPlayer = properties.Split("max-players=")[1].Split("\n")[0];
         playerMCnt = Convert.ToInt32(maxPlayer);
       }
+
+      var time = $"{DateTime.Now.Year:D4}{DateTime.Now.Month:D2}{DateTime.Now.Day:D2}-{DateTime.Now.Hour:D2}{DateTime.Now.Minute:D2}{DateTime.Now.Second:D2}";
+      tbOutput.Clear();
+      tbOutput.AppendText($"Server start at : {time}");
+      logName = $"server-log-{time}.txt";
     }
 
     private void Server_OnExited()
@@ -114,6 +122,10 @@ namespace minecraft_server_launchers
       sliMaxRam.Enabled = true;
       sliMinRam.Enabled = true;
       btnBukkitFile.Enabled = true;
+
+
+      if (!Directory.Exists(logPath)) Directory.CreateDirectory(logPath);
+      File.WriteAllText($"{logPath}/{logName}", tbOutput.Text);
     }
 
     private void ChangeColor(string colorS = "blue-gray")
@@ -240,6 +252,7 @@ namespace minecraft_server_launchers
       void kill()
       {
         Server.Kill();
+        Server_OnExited();
         e.Cancel = false;
       }
 
