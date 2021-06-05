@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace minecraft_server_launchers
 {
@@ -18,6 +20,7 @@ namespace minecraft_server_launchers
     private string bukkitPath;
     private string serverPath;
     private string logPath;
+    private readonly string settingPath = "./server-setting.json";
     private PerformanceCounter pfcRam = new()
     {
       CategoryName = "Process",
@@ -159,7 +162,10 @@ namespace minecraft_server_launchers
       Server.MinRam = Math.Min(1, sliMinRam.Value);
       Server.WorkingDirectory = serverPath;
       Server.Start();
-      pfcRam.InstanceName = $"{Server.process.ProcessName}#{Server.process.SessionId}";
+      if (Server.process.SessionId == 0)
+        pfcRam.InstanceName = Server.process.ProcessName;
+      else
+        pfcRam.InstanceName = $"{Server.process.ProcessName}#{Server.process.SessionId}";
     }
 
     private void btnInput_Click(object sender, EventArgs e)
@@ -181,6 +187,7 @@ namespace minecraft_server_launchers
       pnFileEditor.Controls.Add(editFiles);
 
       LoadPlugins();
+      LoadSetting();
     }
 
     private void LoadBukkitFile()
@@ -259,6 +266,7 @@ namespace minecraft_server_launchers
     private void Main_FormClosing(object sender, FormClosingEventArgs e)
     {
       e.Cancel = Server.IsOnline;
+      SaveSetting();
       void kill()
       {
         Server.Kill();
@@ -339,7 +347,7 @@ namespace minecraft_server_launchers
       for (var i = 0; i < paths.Length; i++)
       {
         if (File.Exists(paths[i]))
-          File.Copy(paths[i], $"{serverPath}/plugins/{names[i]}",true);
+          File.Copy(paths[i], $"{serverPath}/plugins/{names[i]}", true);
       }
     }
 
@@ -371,5 +379,31 @@ namespace minecraft_server_launchers
       LoadPlugins();
     }
     #endregion
+
+    private void SaveSetting()
+    {
+      var j = new JObject()
+      {
+        new JProperty("max-ram", sliMaxRam.Value),
+        new JProperty("min-ram", sliMinRam.Value)
+      };
+      File.WriteAllText(settingPath, j.ToString());
+    }
+
+    private void LoadSetting()
+    {
+      if (File.Exists(settingPath))
+      {
+        using (var file = File.OpenText(settingPath))
+        using (var reader = new JsonTextReader(file))
+        {
+          var json = (JObject)JToken.ReadFrom(reader);
+
+          sliMaxRam.Value = Convert.ToInt32(json["max-ram"].ToString());
+          sliMinRam.RangeMax = Math.Max(1, sliMaxRam.Value);
+          sliMinRam.Value = Convert.ToInt32(json["min-ram"].ToString());
+        }
+      }
+    }
   }
 }

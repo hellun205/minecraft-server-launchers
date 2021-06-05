@@ -29,6 +29,7 @@
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
       this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
       this.tpgLog = new System.Windows.Forms.TabPage();
       this.lsvPList = new System.Windows.Forms.ListView();
@@ -42,6 +43,9 @@
       this.labPlugins = new MaterialSkin.Controls.MaterialLabel();
       this.pnPlugins = new System.Windows.Forms.Panel();
       this.lsvPlugins = new System.Windows.Forms.ListView();
+      this.cmsPlugins = new MaterialSkin.Controls.MaterialContextMenuStrip();
+      this.tsiOPF = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsiPluginDelete2 = new System.Windows.Forms.ToolStripMenuItem();
       this.imlPlugins = new System.Windows.Forms.ImageList(this.components);
       this.msPlugins = new System.Windows.Forms.MenuStrip();
       this.tsiPluginsRefresh = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,16 +65,13 @@
       this.tmStatus2 = new System.Windows.Forms.Timer(this.components);
       this.prbRamUsg = new MaterialSkin.Controls.MaterialProgressBar();
       this.labRamUsg = new MaterialSkin.Controls.MaterialLabel();
-      this.cmsPlugins = new MaterialSkin.Controls.MaterialContextMenuStrip();
-      this.tsiOPF = new System.Windows.Forms.ToolStripMenuItem();
-      this.tsiPluginDelete2 = new System.Windows.Forms.ToolStripMenuItem();
       this.ofdPlugins = new System.Windows.Forms.OpenFileDialog();
       this.tabControl.SuspendLayout();
       this.tpgLog.SuspendLayout();
       this.tpgSetting.SuspendLayout();
       this.pnPlugins.SuspendLayout();
-      this.msPlugins.SuspendLayout();
       this.cmsPlugins.SuspendLayout();
+      this.msPlugins.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl
@@ -264,6 +265,31 @@
       this.lsvPlugins.UseCompatibleStateImageBehavior = false;
       this.lsvPlugins.DragDrop += new System.Windows.Forms.DragEventHandler(this.lsvPlugins_DragDrop);
       this.lsvPlugins.DragEnter += new System.Windows.Forms.DragEventHandler(this.lsvPlugins_DragEnter);
+      // 
+      // cmsPlugins
+      // 
+      this.cmsPlugins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+      this.cmsPlugins.Depth = 0;
+      this.cmsPlugins.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsiOPF,
+            this.tsiPluginDelete2});
+      this.cmsPlugins.MouseState = MaterialSkin.MouseState.HOVER;
+      this.cmsPlugins.Name = "cmsPlugins";
+      this.cmsPlugins.Size = new System.Drawing.Size(185, 48);
+      // 
+      // tsiOPF
+      // 
+      this.tsiOPF.Name = "tsiOPF";
+      this.tsiOPF.Size = new System.Drawing.Size(184, 22);
+      this.tsiOPF.Text = "Open plugin\'s folder";
+      this.tsiOPF.Click += new System.EventHandler(this.tsiOPF_Click);
+      // 
+      // tsiPluginDelete2
+      // 
+      this.tsiPluginDelete2.Name = "tsiPluginDelete2";
+      this.tsiPluginDelete2.Size = new System.Drawing.Size(184, 22);
+      this.tsiPluginDelete2.Text = "Delete";
+      this.tsiPluginDelete2.Click += new System.EventHandler(this.DPlugins);
       // 
       // imlPlugins
       // 
@@ -477,31 +503,6 @@
       this.labRamUsg.TabIndex = 7;
       this.labRamUsg.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
-      // cmsPlugins
-      // 
-      this.cmsPlugins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.cmsPlugins.Depth = 0;
-      this.cmsPlugins.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsiOPF,
-            this.tsiPluginDelete2});
-      this.cmsPlugins.MouseState = MaterialSkin.MouseState.HOVER;
-      this.cmsPlugins.Name = "cmsPlugins";
-      this.cmsPlugins.Size = new System.Drawing.Size(185, 48);
-      // 
-      // tsiOPF
-      // 
-      this.tsiOPF.Name = "tsiOPF";
-      this.tsiOPF.Size = new System.Drawing.Size(184, 22);
-      this.tsiOPF.Text = "Open plugin\'s folder";
-      this.tsiOPF.Click += new System.EventHandler(this.tsiOPF_Click);
-      // 
-      // tsiPluginDelete2
-      // 
-      this.tsiPluginDelete2.Name = "tsiPluginDelete2";
-      this.tsiPluginDelete2.Size = new System.Drawing.Size(184, 22);
-      this.tsiPluginDelete2.Text = "Delete";
-      this.tsiPluginDelete2.Click += new System.EventHandler(this.DPlugins);
-      // 
       // ofdPlugins
       // 
       this.ofdPlugins.Filter = "Jar File|*.jar";
@@ -519,6 +520,7 @@
       this.Controls.Add(this.btnStart);
       this.Controls.Add(this.tabSelector);
       this.Controls.Add(this.tabControl);
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MainMenuStrip = this.msPlugins;
       this.MinimumSize = new System.Drawing.Size(600, 275);
       this.Name = "Main";
@@ -531,9 +533,9 @@
       this.tpgSetting.ResumeLayout(false);
       this.pnPlugins.ResumeLayout(false);
       this.pnPlugins.PerformLayout();
+      this.cmsPlugins.ResumeLayout(false);
       this.msPlugins.ResumeLayout(false);
       this.msPlugins.PerformLayout();
-      this.cmsPlugins.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
