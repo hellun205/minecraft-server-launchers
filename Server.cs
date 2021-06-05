@@ -53,6 +53,7 @@ namespace minecraft_server_launchers
       process.EnableRaisingEvents = true;
       process.BeginErrorReadLine();
       process.BeginOutputReadLine();
+
       IsOnline = true;
       OnStarted();
     }
@@ -64,8 +65,12 @@ namespace minecraft_server_launchers
 
     private void Output(object sender, DataReceivedEventArgs e)
     {
-      Data = e.Data;
-      OnOutput(Data);
+      Data = String.Empty;
+      if (IsOnline)
+      {
+        Data = e.Data;
+        OnOutput(Data);
+      }
     }
 
     public void Input(string inputCommand)
@@ -75,10 +80,10 @@ namespace minecraft_server_launchers
 
     private void Exited(object sender, EventArgs e)
     {
+      IsOnline = false;
       process.Kill();
       process.Dispose();
       process = new Process();
-      IsOnline = false;
       OnExited();
     }
 

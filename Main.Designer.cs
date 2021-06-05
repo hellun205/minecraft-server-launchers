@@ -31,7 +31,8 @@
       this.components = new System.ComponentModel.Container();
       this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
       this.tpgLog = new System.Windows.Forms.TabPage();
-      this.lsvPList = new MaterialSkin.Controls.MaterialListView();
+      this.lsvPList = new System.Windows.Forms.ListView();
+      this.imlPlayer = new System.Windows.Forms.ImageList(this.components);
       this.labPStr = new MaterialSkin.Controls.MaterialLabel();
       this.prbPInt = new MaterialSkin.Controls.MaterialProgressBar();
       this.btnInput = new MaterialSkin.Controls.MaterialButton();
@@ -93,29 +94,29 @@
       // 
       this.lsvPList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.lsvPList.AutoSizeTable = false;
-      this.lsvPList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-      this.lsvPList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.lsvPList.Depth = 0;
       this.lsvPList.FullRowSelect = true;
       this.lsvPList.HideSelection = false;
+      this.lsvPList.LargeImageList = this.imlPlayer;
       this.lsvPList.Location = new System.Drawing.Point(527, 40);
-      this.lsvPList.MinimumSize = new System.Drawing.Size(200, 100);
-      this.lsvPList.MouseLocation = new System.Drawing.Point(-1, -1);
-      this.lsvPList.MouseState = MaterialSkin.MouseState.OUT;
       this.lsvPList.Name = "lsvPList";
-      this.lsvPList.OwnerDraw = true;
-      this.lsvPList.Size = new System.Drawing.Size(200, 274);
+      this.lsvPList.Size = new System.Drawing.Size(200, 271);
+      this.lsvPList.SmallImageList = this.imlPlayer;
       this.lsvPList.TabIndex = 5;
       this.lsvPList.UseCompatibleStateImageBehavior = false;
-      this.lsvPList.View = System.Windows.Forms.View.Details;
+      this.lsvPList.View = System.Windows.Forms.View.List;
+      // 
+      // imlPlayer
+      // 
+      this.imlPlayer.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+      this.imlPlayer.ImageSize = new System.Drawing.Size(16, 16);
+      this.imlPlayer.TransparentColor = System.Drawing.Color.Transparent;
       // 
       // labPStr
       // 
       this.labPStr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.labPStr.Depth = 0;
       this.labPStr.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-      this.labPStr.Location = new System.Drawing.Point(527, 14);
+      this.labPStr.Location = new System.Drawing.Point(527, 7);
       this.labPStr.MouseState = MaterialSkin.MouseState.HOVER;
       this.labPStr.Name = "labPStr";
       this.labPStr.Size = new System.Drawing.Size(200, 23);
@@ -126,7 +127,7 @@
       // 
       this.prbPInt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.prbPInt.Depth = 0;
-      this.prbPInt.Location = new System.Drawing.Point(527, 6);
+      this.prbPInt.Location = new System.Drawing.Point(527, 31);
       this.prbPInt.MouseState = MaterialSkin.MouseState.HOVER;
       this.prbPInt.Name = "prbPInt";
       this.prbPInt.Size = new System.Drawing.Size(200, 5);
@@ -248,7 +249,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.pnFileEditor.Location = new System.Drawing.Point(345, 38);
       this.pnFileEditor.Name = "pnFileEditor";
-      this.pnFileEditor.Size = new System.Drawing.Size(379, 291);
+      this.pnFileEditor.Size = new System.Drawing.Size(379, 276);
       this.pnFileEditor.TabIndex = 3;
       // 
       // sliMaxRam
@@ -411,7 +412,6 @@
     private MaterialSkin.Controls.MaterialTabSelector tabSelector;
     private MaterialSkin.Controls.MaterialButton btnStart;
     private System.Windows.Forms.TabPage tpgLog;
-    private MaterialSkin.Controls.MaterialListView lsvPList;
     private MaterialSkin.Controls.MaterialLabel labPStr;
     private MaterialSkin.Controls.MaterialProgressBar prbPInt;
     private MaterialSkin.Controls.MaterialButton btnInput;
@@ -429,6 +429,8 @@
     private System.Windows.Forms.Timer tmStatus2;
     private MaterialSkin.Controls.MaterialProgressBar prbRamUsg;
     private MaterialSkin.Controls.MaterialLabel labRamUsg;
+    private System.Windows.Forms.ImageList imlPlayer;
+    private System.Windows.Forms.ListView lsvPList;
   }
 }
 

@@ -5,6 +5,8 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Linq;
+using System.Net;
 
 namespace minecraft_server_launchers
 {
@@ -21,6 +23,8 @@ namespace minecraft_server_launchers
       InstanceName = "java"
     };
     private double usageRam;
+    private int playerCnt;
+    private int playerMCnt;
 
     private EditFileList editFiles;
 
@@ -39,11 +43,46 @@ namespace minecraft_server_launchers
       Loads();
       lbServerStatus.BackColor = Color.FromArgb(48, 63, 159);
       lbServerStatus.ForeColor = Color.Red;
+
+      lsvPList.View = View.List;
     }
 
     private void Server_OnOutput(string data)
     {
       tbOutput.AppendText($"\n{data}");
+
+      if (data != null && data != "")
+      {
+        if (data.Contains("UUID of player"))
+        {
+          var playerName = data.Split("UUID of player ")[1].Split(" is")[0];
+          foreach (var item in lsvPList.Items.Cast<ListViewItem>())
+            if (item.Text == playerName) return;
+
+          lsvPList.Items.Add(playerName);
+          playerCnt++;
+
+          var head = new WebClient();
+          imlPlayer.Images.Add(Image.FromStream(new MemoryStream(head.DownloadData($"http://mc-heads.net/avatar/{playerName}"))));
+          imlPlayer.Images[^1].Tag = playerName;
+
+          lsvPList.Items[^1].ImageIndex = imlPlayer.Images.Count - 1;
+        }
+        else if (data.Contains("lost connection"))
+        {
+          var playerName = data.Split(" lost connection")[0].Split(": ")[1];
+
+          foreach (var item in lsvPList.Items.Cast<ListViewItem>())
+            if (item.Text == playerName)
+              lsvPList.Items.Remove(item);
+
+          foreach (var image in imlPlayer.Images.Cast<Image>())
+            if ((string)image.Tag == playerName)
+              imlPlayer.Images.Remove(image);
+
+          playerCnt--;
+        }
+      }
     }
 
     private void Server_OnStarted()
@@ -56,6 +95,13 @@ namespace minecraft_server_launchers
       sliMaxRam.Enabled = false;
       sliMinRam.Enabled = false;
       btnBukkitFile.Enabled = false;
+
+      if (File.Exists("./server/server.properties"))
+      {
+        var properties = File.ReadAllText("./server/server.properties");
+        var maxPlayer = properties.Split("max-players=")[1].Split("\n")[0];
+        playerMCnt = Convert.ToInt32(maxPlayer);
+      }
     }
 
     private void Server_OnExited()
@@ -125,7 +171,7 @@ namespace minecraft_server_launchers
       sliMinRam.RangeMax = Math.Max(1, sliMaxRam.Value);
 
       editFiles = new(serverPath, new string[] { "*.yml", "*.json", "*.properties", "*.txt" });
-      editFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+      editFiles.Dock = DockStyle.Fill;
       pnFileEditor.Controls.Add(editFiles);
     }
 
@@ -168,7 +214,7 @@ namespace minecraft_server_launchers
     {
       try
       {
-        usageRam = Math.Round(pfcRam.NextValue() / Math.Pow(1024,2), 2);
+        usageRam = Math.Round(pfcRam.NextValue() / Math.Pow(1024, 2), 2);
       }
       catch
       {
@@ -180,8 +226,12 @@ namespace minecraft_server_launchers
     private void tmStatus2_Tick(object sender, EventArgs e)
     {
       prbRamUsg.Maximum = Server.MaxRam * 1024;
-      prbRamUsg.Value = (int)(Math.Max(prbRamUsg.Minimum, Math.Min(usageRam,prbRamUsg.Maximum)));
-      labRamUsg.Text = $"{usageRam} / {Math.Round((double)Server.MaxRam * 1024,2)} MB";
+      prbRamUsg.Value = (int)(Math.Max(prbRamUsg.Minimum, Math.Min(usageRam, prbRamUsg.Maximum)));
+      labRamUsg.Text = $"{usageRam} / {Math.Round((double)Server.MaxRam * 1024, 2)} MB";
+
+      prbPInt.Maximum = playerMCnt;
+      prbPInt.Value = (int)(Math.Max(prbPInt.Minimum, Math.Min(playerCnt, prbPInt.Maximum)));
+      labPStr.Text = $"{playerCnt} / {playerMCnt}";
     }
   }
 }
