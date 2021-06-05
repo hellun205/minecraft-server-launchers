@@ -237,23 +237,24 @@ namespace minecraft_server_launchers
     private void Main_FormClosing(object sender, FormClosingEventArgs e)
     {
       e.Cancel = Server.IsOnline;
+      void kill()
+      {
+        Server.Kill();
+        e.Cancel = false;
+      }
 
       if (Server.IsOnline)
       {
         if (e.CloseReason == CloseReason.UserClosing || e.CloseReason == CloseReason.FormOwnerClosing || e.CloseReason == CloseReason.ApplicationExitCall)
         {
           if (MessageBox.Show(this, "Are you sure you want to shut down the server?", "MSL", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-          {
-            Server.Kill();
-            e.Cancel = false;
-          }
+            kill();
         }
         else if (e.CloseReason == CloseReason.WindowsShutDown || e.CloseReason == CloseReason.TaskManagerClosing)
-        {
-          Server.Kill();
-          e.Cancel = false;
-        }
+          kill();
       }
+
+
     }
   }
 }
