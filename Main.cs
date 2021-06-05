@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Collections.Generic;
 
 namespace minecraft_server_launchers
 {
@@ -26,6 +27,7 @@ namespace minecraft_server_launchers
     private int playerCnt;
     private int playerMCnt;
     private string logName;
+    private Icon jarIcon;
 
     private EditFileList editFiles;
 
@@ -60,15 +62,12 @@ namespace minecraft_server_launchers
           var playerName = data.Split("UUID of player ")[1].Split(" is")[0];
           foreach (var item in lsvPList.Items.Cast<ListViewItem>())
             if (item.Text == playerName) return;
-
-          lsvPList.Items.Add(playerName);
-          playerCnt++;
-
           var head = new WebClient();
           imlPlayer.Images.Add(Image.FromStream(new MemoryStream(head.DownloadData($"http://mc-heads.net/avatar/{playerName}"))));
           imlPlayer.Images[^1].Tag = playerName;
 
-          lsvPList.Items[^1].ImageIndex = imlPlayer.Images.Count - 1;
+          lsvPList.Items.Add(playerName, imlPlayer.Images.Count - 1);
+          playerCnt++;
         }
         else if (data.Contains("lost connection"))
         {
@@ -180,6 +179,8 @@ namespace minecraft_server_launchers
       editFiles = new(serverPath, new string[] { "*.yml", "*.json", "*.properties", "*.txt" });
       editFiles.Dock = DockStyle.Fill;
       pnFileEditor.Controls.Add(editFiles);
+
+      LoadPlugins();
     }
 
     private void LoadBukkitFile()
@@ -187,7 +188,10 @@ namespace minecraft_server_launchers
       var fileInfo = new DirectoryInfo(serverPath).GetFiles("*.jar");
       if (fileInfo.Length > 0)
       {
-        btnBukkitFile.Image = Icon.ExtractAssociatedIcon(fileInfo[0].FullName).ToBitmap();
+        jarIcon = Icon.ExtractAssociatedIcon(fileInfo[0].FullName);
+        imlPlugins.Images.Clear();
+        imlPlugins.Images.Add(jarIcon);
+        btnBukkitFile.Image = jarIcon.ToBitmap();
         btnBukkitFile.Text = fileInfo[0].Name;
         bukkitPath = fileInfo[0].FullName;
       }
@@ -273,6 +277,7 @@ namespace minecraft_server_launchers
           kill();
       }
     }
+
     private void btnBukkitFile_Click(object sender, EventArgs e)
     {
       if (ofd.ShowDialog() == DialogResult.OK)
@@ -282,9 +287,89 @@ namespace minecraft_server_launchers
           File.Delete(bukkitPath);
           File.Copy(ofd.FileName, $"{serverPath}/{ofd.SafeFileName}");
           LoadBukkitFile();
-          MessageBox.Show(this, "You have successfully replaced the bukkit file.","MSL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          MessageBox.Show(this, "You have successfully replaced the bukkit file.", "MSL", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
       }
     }
+
+    #region "Plugins"
+    private void LoadPlugins()
+    {
+      lsvPlugins.Clear();
+      if (!Directory.Exists($"{serverPath}/plugins")) Directory.CreateDirectory($"{serverPath}/plugins");
+
+      var dirInfo = new DirectoryInfo($"{serverPath}/plugins");
+      var arrFile = dirInfo.GetFiles("*.jar");
+
+      foreach (var file in arrFile)
+      {
+        lsvPlugins.Items.Add(file.Name, 0);
+      }
+    }
+
+    private void tsiPluginsAdd_Click(object sender, EventArgs e)
+    {
+      if (ofdPlugins.ShowDialog() == DialogResult.OK)
+      {
+        AddPlugins(ofdPlugins.FileNames, ofdPlugins.SafeFileNames);
+        LoadPlugins();
+      }
+    }
+
+    private void DPlugins(object sender, EventArgs e)
+    {
+      List<string> names = new();
+      foreach (var item in lsvPlugins.SelectedItems.Cast<ListViewItem>())
+        names.Add(item.Text);
+      DeletePlugins(names.ToArray());
+      LoadPlugins();
+    }
+
+    private void tsiOPF_Click(object sender, EventArgs e)
+    {
+      var dPath = lsvPlugins.SelectedItems[0].Text.Split(".jar")[0];
+      if (Directory.Exists(dPath))
+        Process.Start(dPath);
+      else
+        MessageBox.Show(this, "The folder does not exist.", "MSL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    }
+
+    private void AddPlugins(string[] paths, string[] names)
+    {
+      for (var i = 0; i < paths.Length; i++)
+      {
+        if (File.Exists(paths[i]))
+          File.Copy(paths[i], $"{serverPath}/plugins/{names[i]}",true);
+      }
+    }
+
+    private void DeletePlugins(string[] names)
+    {
+      if (!Server.IsOnline)
+      {
+        foreach (var name in names)
+        {
+          var path = $"{serverPath}/plugins/{name}";
+          if (File.Exists(path)) File.Delete(path);
+        }
+      }
+    }
+
+    private void lsvPlugins_DragEnter(object sender, DragEventArgs e)
+    {
+      if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+    }
+
+    private void lsvPlugins_DragDrop(object sender, DragEventArgs e)
+    {
+      string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+      List<string> names = new();
+      foreach (var file in files)
+        names.Add(Path.GetFileName(file));
+
+      AddPlugins(files, names.ToArray());
+      LoadPlugins();
+    }
+    #endregion
   }
 }

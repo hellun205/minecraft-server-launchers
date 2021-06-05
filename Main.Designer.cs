@@ -39,6 +39,14 @@
       this.tbInput = new MaterialSkin.Controls.MaterialTextBox();
       this.tbOutput = new MaterialSkin.Controls.MaterialMultiLineTextBox();
       this.tpgSetting = new System.Windows.Forms.TabPage();
+      this.labPlugins = new MaterialSkin.Controls.MaterialLabel();
+      this.pnPlugins = new System.Windows.Forms.Panel();
+      this.lsvPlugins = new System.Windows.Forms.ListView();
+      this.imlPlugins = new System.Windows.Forms.ImageList(this.components);
+      this.msPlugins = new System.Windows.Forms.MenuStrip();
+      this.tsiPluginsRefresh = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsiPluginsAdd = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsiPluginsDelete = new System.Windows.Forms.ToolStripMenuItem();
       this.labFileEditorTitle = new MaterialSkin.Controls.MaterialLabel();
       this.btnFileEditorRefresh = new MaterialSkin.Controls.MaterialButton();
       this.pnFileEditor = new System.Windows.Forms.Panel();
@@ -53,9 +61,16 @@
       this.tmStatus2 = new System.Windows.Forms.Timer(this.components);
       this.prbRamUsg = new MaterialSkin.Controls.MaterialProgressBar();
       this.labRamUsg = new MaterialSkin.Controls.MaterialLabel();
+      this.cmsPlugins = new MaterialSkin.Controls.MaterialContextMenuStrip();
+      this.tsiOPF = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsiPluginDelete2 = new System.Windows.Forms.ToolStripMenuItem();
+      this.ofdPlugins = new System.Windows.Forms.OpenFileDialog();
       this.tabControl.SuspendLayout();
       this.tpgLog.SuspendLayout();
       this.tpgSetting.SuspendLayout();
+      this.pnPlugins.SuspendLayout();
+      this.msPlugins.SuspendLayout();
+      this.cmsPlugins.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl
@@ -196,6 +211,8 @@
       // 
       // tpgSetting
       // 
+      this.tpgSetting.Controls.Add(this.labPlugins);
+      this.tpgSetting.Controls.Add(this.pnPlugins);
       this.tpgSetting.Controls.Add(this.labFileEditorTitle);
       this.tpgSetting.Controls.Add(this.btnFileEditorRefresh);
       this.tpgSetting.Controls.Add(this.pnFileEditor);
@@ -209,6 +226,82 @@
       this.tpgSetting.TabIndex = 1;
       this.tpgSetting.Text = "Setting";
       this.tpgSetting.UseVisualStyleBackColor = true;
+      // 
+      // labPlugins
+      // 
+      this.labPlugins.Depth = 0;
+      this.labPlugins.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+      this.labPlugins.Location = new System.Drawing.Point(6, 110);
+      this.labPlugins.MouseState = MaterialSkin.MouseState.HOVER;
+      this.labPlugins.Name = "labPlugins";
+      this.labPlugins.Size = new System.Drawing.Size(333, 23);
+      this.labPlugins.TabIndex = 7;
+      this.labPlugins.Text = "Plugins";
+      // 
+      // pnPlugins
+      // 
+      this.pnPlugins.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.pnPlugins.Controls.Add(this.lsvPlugins);
+      this.pnPlugins.Controls.Add(this.msPlugins);
+      this.pnPlugins.Location = new System.Drawing.Point(6, 136);
+      this.pnPlugins.Name = "pnPlugins";
+      this.pnPlugins.Size = new System.Drawing.Size(333, 178);
+      this.pnPlugins.TabIndex = 6;
+      // 
+      // lsvPlugins
+      // 
+      this.lsvPlugins.AllowDrop = true;
+      this.lsvPlugins.ContextMenuStrip = this.cmsPlugins;
+      this.lsvPlugins.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.lsvPlugins.HideSelection = false;
+      this.lsvPlugins.LargeImageList = this.imlPlugins;
+      this.lsvPlugins.Location = new System.Drawing.Point(0, 24);
+      this.lsvPlugins.Name = "lsvPlugins";
+      this.lsvPlugins.Size = new System.Drawing.Size(333, 154);
+      this.lsvPlugins.SmallImageList = this.imlPlugins;
+      this.lsvPlugins.TabIndex = 1;
+      this.lsvPlugins.UseCompatibleStateImageBehavior = false;
+      this.lsvPlugins.DragDrop += new System.Windows.Forms.DragEventHandler(this.lsvPlugins_DragDrop);
+      this.lsvPlugins.DragEnter += new System.Windows.Forms.DragEventHandler(this.lsvPlugins_DragEnter);
+      // 
+      // imlPlugins
+      // 
+      this.imlPlugins.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+      this.imlPlugins.ImageSize = new System.Drawing.Size(32, 32);
+      this.imlPlugins.TransparentColor = System.Drawing.Color.Transparent;
+      // 
+      // msPlugins
+      // 
+      this.msPlugins.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsiPluginsRefresh,
+            this.tsiPluginsAdd,
+            this.tsiPluginsDelete});
+      this.msPlugins.Location = new System.Drawing.Point(0, 0);
+      this.msPlugins.Name = "msPlugins";
+      this.msPlugins.Size = new System.Drawing.Size(333, 24);
+      this.msPlugins.TabIndex = 0;
+      this.msPlugins.Text = "menuStrip1";
+      // 
+      // tsiPluginsRefresh
+      // 
+      this.tsiPluginsRefresh.Name = "tsiPluginsRefresh";
+      this.tsiPluginsRefresh.Size = new System.Drawing.Size(58, 20);
+      this.tsiPluginsRefresh.Text = "Refresh";
+      // 
+      // tsiPluginsAdd
+      // 
+      this.tsiPluginsAdd.Name = "tsiPluginsAdd";
+      this.tsiPluginsAdd.Size = new System.Drawing.Size(41, 20);
+      this.tsiPluginsAdd.Text = "Add";
+      this.tsiPluginsAdd.Click += new System.EventHandler(this.tsiPluginsAdd_Click);
+      // 
+      // tsiPluginsDelete
+      // 
+      this.tsiPluginsDelete.Name = "tsiPluginsDelete";
+      this.tsiPluginsDelete.Size = new System.Drawing.Size(53, 20);
+      this.tsiPluginsDelete.Text = "Delete";
+      this.tsiPluginsDelete.Click += new System.EventHandler(this.DPlugins);
       // 
       // labFileEditorTitle
       // 
@@ -384,6 +477,37 @@
       this.labRamUsg.TabIndex = 7;
       this.labRamUsg.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
+      // cmsPlugins
+      // 
+      this.cmsPlugins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+      this.cmsPlugins.Depth = 0;
+      this.cmsPlugins.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsiOPF,
+            this.tsiPluginDelete2});
+      this.cmsPlugins.MouseState = MaterialSkin.MouseState.HOVER;
+      this.cmsPlugins.Name = "cmsPlugins";
+      this.cmsPlugins.Size = new System.Drawing.Size(185, 48);
+      // 
+      // tsiOPF
+      // 
+      this.tsiOPF.Name = "tsiOPF";
+      this.tsiOPF.Size = new System.Drawing.Size(184, 22);
+      this.tsiOPF.Text = "Open plugin\'s folder";
+      this.tsiOPF.Click += new System.EventHandler(this.tsiOPF_Click);
+      // 
+      // tsiPluginDelete2
+      // 
+      this.tsiPluginDelete2.Name = "tsiPluginDelete2";
+      this.tsiPluginDelete2.Size = new System.Drawing.Size(184, 22);
+      this.tsiPluginDelete2.Text = "Delete";
+      this.tsiPluginDelete2.Click += new System.EventHandler(this.DPlugins);
+      // 
+      // ofdPlugins
+      // 
+      this.ofdPlugins.Filter = "Jar File|*.jar";
+      this.ofdPlugins.InitialDirectory = "./server/plugins";
+      this.ofdPlugins.Multiselect = true;
+      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -395,6 +519,7 @@
       this.Controls.Add(this.btnStart);
       this.Controls.Add(this.tabSelector);
       this.Controls.Add(this.tabControl);
+      this.MainMenuStrip = this.msPlugins;
       this.MinimumSize = new System.Drawing.Size(600, 275);
       this.Name = "Main";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -404,6 +529,11 @@
       this.tpgLog.ResumeLayout(false);
       this.tpgLog.PerformLayout();
       this.tpgSetting.ResumeLayout(false);
+      this.pnPlugins.ResumeLayout(false);
+      this.pnPlugins.PerformLayout();
+      this.msPlugins.ResumeLayout(false);
+      this.msPlugins.PerformLayout();
+      this.cmsPlugins.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -434,6 +564,18 @@
     private MaterialSkin.Controls.MaterialLabel labRamUsg;
     private System.Windows.Forms.ImageList imlPlayer;
     private System.Windows.Forms.ListView lsvPList;
+    private MaterialSkin.Controls.MaterialLabel labPlugins;
+    private System.Windows.Forms.Panel pnPlugins;
+    private System.Windows.Forms.MenuStrip msPlugins;
+    private System.Windows.Forms.ListView lsvPlugins;
+    private System.Windows.Forms.ToolStripMenuItem tsiPluginsRefresh;
+    private System.Windows.Forms.ToolStripMenuItem tsiPluginsAdd;
+    private System.Windows.Forms.ToolStripMenuItem tsiPluginsDelete;
+    private System.Windows.Forms.ImageList imlPlugins;
+    private MaterialSkin.Controls.MaterialContextMenuStrip cmsPlugins;
+    private System.Windows.Forms.ToolStripMenuItem tsiOPF;
+    private System.Windows.Forms.ToolStripMenuItem tsiPluginDelete2;
+    private System.Windows.Forms.OpenFileDialog ofdPlugins;
   }
 }
 
