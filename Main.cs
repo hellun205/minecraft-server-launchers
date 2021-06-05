@@ -233,5 +233,27 @@ namespace minecraft_server_launchers
       prbPInt.Value = (int)(Math.Max(prbPInt.Minimum, Math.Min(playerCnt, prbPInt.Maximum)));
       labPStr.Text = $"{playerCnt} / {playerMCnt}";
     }
+
+    private void Main_FormClosing(object sender, FormClosingEventArgs e)
+    {
+      e.Cancel = Server.IsOnline;
+
+      if (Server.IsOnline)
+      {
+        if (e.CloseReason == CloseReason.UserClosing || e.CloseReason == CloseReason.FormOwnerClosing || e.CloseReason == CloseReason.ApplicationExitCall)
+        {
+          if (MessageBox.Show(this, "Are you sure you want to shut down the server?", "MSL", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+          {
+            Server.Kill();
+            e.Cancel = false;
+          }
+        }
+        else if (e.CloseReason == CloseReason.WindowsShutDown || e.CloseReason == CloseReason.TaskManagerClosing)
+        {
+          Server.Kill();
+          e.Cancel = false;
+        }
+      }
+    }
   }
 }

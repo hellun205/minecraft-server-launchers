@@ -397,6 +397,7 @@
       this.Name = "Main";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "MSL 2.0";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
       this.tabControl.ResumeLayout(false);
       this.tpgLog.ResumeLayout(false);
       this.tpgLog.PerformLayout();

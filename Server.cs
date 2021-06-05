@@ -81,10 +81,15 @@ namespace minecraft_server_launchers
     private void Exited(object sender, EventArgs e)
     {
       IsOnline = false;
+      Kill();
+      OnExited();
+    }
+
+    public void Kill()
+    {
       process.Kill();
       process.Dispose();
       process = new Process();
-      OnExited();
     }
 
   }
