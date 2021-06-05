@@ -294,6 +294,7 @@
       this.btnBukkitFile.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
       this.btnBukkitFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
       this.btnBukkitFile.UseVisualStyleBackColor = true;
+      this.btnBukkitFile.Click += new System.EventHandler(this.btnBukkitFile_Click);
       // 
       // tabSelector
       // 
@@ -332,7 +333,8 @@
       // 
       // ofd
       // 
-      this.ofd.FileName = "openFileDialog1";
+      this.ofd.Filter = "Jar File|*.jar";
+      this.ofd.InitialDirectory = "./server";
       // 
       // lbServerStatus
       // 

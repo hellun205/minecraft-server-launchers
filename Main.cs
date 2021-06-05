@@ -172,6 +172,18 @@ namespace minecraft_server_launchers
     private void Loads()
     {
       if (!Directory.Exists(serverPath)) Directory.CreateDirectory(serverPath);
+
+      LoadBukkitFile();
+      sliMaxRam.RangeMax = Ram.GetTotalGB;
+      sliMinRam.RangeMax = Math.Max(1, sliMaxRam.Value);
+
+      editFiles = new(serverPath, new string[] { "*.yml", "*.json", "*.properties", "*.txt" });
+      editFiles.Dock = DockStyle.Fill;
+      pnFileEditor.Controls.Add(editFiles);
+    }
+
+    private void LoadBukkitFile()
+    {
       var fileInfo = new DirectoryInfo(serverPath).GetFiles("*.jar");
       if (fileInfo.Length > 0)
       {
@@ -179,12 +191,6 @@ namespace minecraft_server_launchers
         btnBukkitFile.Text = fileInfo[0].Name;
         bukkitPath = fileInfo[0].FullName;
       }
-      sliMaxRam.RangeMax = Ram.GetTotalGB;
-      sliMinRam.RangeMax = Math.Max(1, sliMaxRam.Value);
-
-      editFiles = new(serverPath, new string[] { "*.yml", "*.json", "*.properties", "*.txt" });
-      editFiles.Dock = DockStyle.Fill;
-      pnFileEditor.Controls.Add(editFiles);
     }
 
     private void sliMaxRam_onValueChanged(object sender, int newValue)
@@ -266,8 +272,19 @@ namespace minecraft_server_launchers
         else if (e.CloseReason == CloseReason.WindowsShutDown || e.CloseReason == CloseReason.TaskManagerClosing)
           kill();
       }
-
-
+    }
+    private void btnBukkitFile_Click(object sender, EventArgs e)
+    {
+      if (ofd.ShowDialog() == DialogResult.OK)
+      {
+        if (MessageBox.Show(this, "Are you sure you want to replace the bukkit file?", "MSL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          File.Delete(bukkitPath);
+          File.Copy(ofd.FileName, $"{serverPath}/{ofd.SafeFileName}");
+          LoadBukkitFile();
+          MessageBox.Show(this, "You have successfully replaced the bukkit file.","MSL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+      }
     }
   }
 }
