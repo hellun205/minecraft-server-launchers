@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
       this.tpgLog = new System.Windows.Forms.TabPage();
       this.lsvPList = new MaterialSkin.Controls.MaterialListView();
@@ -47,6 +48,10 @@
       this.btnStart = new MaterialSkin.Controls.MaterialButton();
       this.ofd = new System.Windows.Forms.OpenFileDialog();
       this.lbServerStatus = new System.Windows.Forms.Label();
+      this.tmStatus1 = new System.Windows.Forms.Timer(this.components);
+      this.tmStatus2 = new System.Windows.Forms.Timer(this.components);
+      this.prbRamUsg = new MaterialSkin.Controls.MaterialProgressBar();
+      this.labRamUsg = new MaterialSkin.Controls.MaterialLabel();
       this.tabControl.SuspendLayout();
       this.tpgLog.SuspendLayout();
       this.tpgSetting.SuspendLayout();
@@ -65,7 +70,7 @@
       this.tabControl.Multiline = true;
       this.tabControl.Name = "tabControl";
       this.tabControl.SelectedIndex = 0;
-      this.tabControl.Size = new System.Drawing.Size(738, 365);
+      this.tabControl.Size = new System.Drawing.Size(738, 348);
       this.tabControl.TabIndex = 0;
       // 
       // tpgLog
@@ -79,7 +84,7 @@
       this.tpgLog.Location = new System.Drawing.Point(4, 24);
       this.tpgLog.Name = "tpgLog";
       this.tpgLog.Padding = new System.Windows.Forms.Padding(3);
-      this.tpgLog.Size = new System.Drawing.Size(730, 337);
+      this.tpgLog.Size = new System.Drawing.Size(730, 320);
       this.tpgLog.TabIndex = 0;
       this.tpgLog.Text = "Log";
       this.tpgLog.UseVisualStyleBackColor = true;
@@ -100,7 +105,7 @@
       this.lsvPList.MouseState = MaterialSkin.MouseState.OUT;
       this.lsvPList.Name = "lsvPList";
       this.lsvPList.OwnerDraw = true;
-      this.lsvPList.Size = new System.Drawing.Size(200, 291);
+      this.lsvPList.Size = new System.Drawing.Size(200, 274);
       this.lsvPList.TabIndex = 5;
       this.lsvPList.UseCompatibleStateImageBehavior = false;
       this.lsvPList.View = System.Windows.Forms.View.Details;
@@ -135,7 +140,7 @@
       this.btnInput.Depth = 0;
       this.btnInput.HighEmphasis = true;
       this.btnInput.Icon = null;
-      this.btnInput.Location = new System.Drawing.Point(457, 292);
+      this.btnInput.Location = new System.Drawing.Point(457, 275);
       this.btnInput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
       this.btnInput.MouseState = MaterialSkin.MouseState.HOVER;
       this.btnInput.Name = "btnInput";
@@ -156,7 +161,7 @@
       this.tbInput.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
       this.tbInput.Hint = "Input command...";
       this.tbInput.LeadingIcon = null;
-      this.tbInput.Location = new System.Drawing.Point(3, 292);
+      this.tbInput.Location = new System.Drawing.Point(3, 275);
       this.tbInput.MaxLength = 50;
       this.tbInput.MouseState = MaterialSkin.MouseState.OUT;
       this.tbInput.Multiline = false;
@@ -184,7 +189,7 @@
       this.tbOutput.Name = "tbOutput";
       this.tbOutput.ReadOnly = true;
       this.tbOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-      this.tbOutput.Size = new System.Drawing.Size(518, 283);
+      this.tbOutput.Size = new System.Drawing.Size(518, 266);
       this.tbOutput.TabIndex = 0;
       this.tbOutput.Text = "";
       // 
@@ -199,7 +204,7 @@
       this.tpgSetting.Location = new System.Drawing.Point(4, 24);
       this.tpgSetting.Name = "tpgSetting";
       this.tpgSetting.Padding = new System.Windows.Forms.Padding(3);
-      this.tpgSetting.Size = new System.Drawing.Size(730, 337);
+      this.tpgSetting.Size = new System.Drawing.Size(730, 320);
       this.tpgSetting.TabIndex = 1;
       this.tpgSetting.Text = "Setting";
       this.tpgSetting.UseVisualStyleBackColor = true;
@@ -341,11 +346,48 @@
       this.lbServerStatus.Text = "OFF";
       this.lbServerStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
+      // tmStatus1
+      // 
+      this.tmStatus1.Enabled = true;
+      this.tmStatus1.Interval = 500;
+      this.tmStatus1.Tick += new System.EventHandler(this.tmStatus1_Tick);
+      // 
+      // tmStatus2
+      // 
+      this.tmStatus2.Tick += new System.EventHandler(this.tmStatus2_Tick);
+      // 
+      // prbRamUsg
+      // 
+      this.prbRamUsg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.prbRamUsg.Depth = 0;
+      this.prbRamUsg.Location = new System.Drawing.Point(6, 419);
+      this.prbRamUsg.MouseState = MaterialSkin.MouseState.HOVER;
+      this.prbRamUsg.Name = "prbRamUsg";
+      this.prbRamUsg.Size = new System.Drawing.Size(601, 5);
+      this.prbRamUsg.TabIndex = 6;
+      // 
+      // labRamUsg
+      // 
+      this.labRamUsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.labRamUsg.AutoEllipsis = true;
+      this.labRamUsg.Depth = 0;
+      this.labRamUsg.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+      this.labRamUsg.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+      this.labRamUsg.Location = new System.Drawing.Point(613, 414);
+      this.labRamUsg.MouseState = MaterialSkin.MouseState.HOVER;
+      this.labRamUsg.Name = "labRamUsg";
+      this.labRamUsg.Size = new System.Drawing.Size(130, 13);
+      this.labRamUsg.TabIndex = 7;
+      this.labRamUsg.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      // 
       // Main
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(750, 430);
+      this.Controls.Add(this.labRamUsg);
+      this.Controls.Add(this.prbRamUsg);
       this.Controls.Add(this.lbServerStatus);
       this.Controls.Add(this.btnStart);
       this.Controls.Add(this.tabSelector);
@@ -383,6 +425,10 @@
     private MaterialSkin.Controls.MaterialLabel labFileEditorTitle;
     private MaterialSkin.Controls.MaterialButton btnFileEditorRefresh;
     private System.Windows.Forms.Label lbServerStatus;
+    private System.Windows.Forms.Timer tmStatus1;
+    private System.Windows.Forms.Timer tmStatus2;
+    private MaterialSkin.Controls.MaterialProgressBar prbRamUsg;
+    private MaterialSkin.Controls.MaterialLabel labRamUsg;
   }
 }
 

@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace minecraft_server_launchers
 {
@@ -13,6 +14,13 @@ namespace minecraft_server_launchers
     public Server Server = new();
     private string bukkitPath;
     private string serverPath = "./server/";
+    private PerformanceCounter pfcRam = new()
+    {
+      CategoryName = "Process",
+      CounterName = "Working Set - Private",
+      InstanceName = "java"
+    };
+    private double usageRam;
 
     private EditFileList editFiles;
 
@@ -33,9 +41,9 @@ namespace minecraft_server_launchers
       lbServerStatus.ForeColor = Color.Red;
     }
 
-    private void Server_OnOutput()
+    private void Server_OnOutput(string data)
     {
-      tbOutput.AppendText($"\n{Server.Data}");
+      tbOutput.AppendText($"\n{data}");
     }
 
     private void Server_OnStarted()
@@ -44,6 +52,10 @@ namespace minecraft_server_launchers
       btnStart.Enabled = false;
       lbServerStatus.ForeColor = Color.LimeGreen;
       lbServerStatus.Text = "ON";
+
+      sliMaxRam.Enabled = false;
+      sliMinRam.Enabled = false;
+      btnBukkitFile.Enabled = false;
     }
 
     private void Server_OnExited()
@@ -52,6 +64,10 @@ namespace minecraft_server_launchers
       btnStart.Enabled = true;
       lbServerStatus.ForeColor = Color.Red;
       lbServerStatus.Text = "OFF";
+
+      sliMaxRam.Enabled = true;
+      sliMinRam.Enabled = true;
+      btnBukkitFile.Enabled = true;
     }
 
     private void ChangeColor(string colorS = "blue-gray")
@@ -146,6 +162,26 @@ namespace minecraft_server_launchers
     {
       Server.Input(tbInput.Text);
       tbInput.Clear();
+    }
+
+    private void tmStatus1_Tick(object sender, EventArgs e)
+    {
+      try
+      {
+        usageRam = Math.Round(pfcRam.NextValue() / Math.Pow(1024,2), 2);
+      }
+      catch
+      {
+        usageRam = 0;
+      }
+      if (!tmStatus2.Enabled) tmStatus2.Start();
+    }
+
+    private void tmStatus2_Tick(object sender, EventArgs e)
+    {
+      prbRamUsg.Maximum = Server.MaxRam * 1024;
+      prbRamUsg.Value = (int)(Math.Max(prbRamUsg.Minimum, Math.Min(usageRam,prbRamUsg.Maximum)));
+      labRamUsg.Text = $"{usageRam} / {Math.Round((double)Server.MaxRam * 1024,2)} MB";
     }
   }
 }

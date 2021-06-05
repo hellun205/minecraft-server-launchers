@@ -5,7 +5,7 @@ namespace minecraft_server_launchers
 {
   public delegate void OnStarted();
   public delegate void OnExited();
-  public delegate void OnOutput();
+  public delegate void OnOutput(string data);
   public class Server
   {
     private Process process = new Process();
@@ -65,7 +65,7 @@ namespace minecraft_server_launchers
     private void Output(object sender, DataReceivedEventArgs e)
     {
       Data = e.Data;
-      OnOutput();
+      OnOutput(Data);
     }
 
     public void Input(string inputCommand)
