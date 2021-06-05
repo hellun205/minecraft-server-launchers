@@ -20,8 +20,7 @@ namespace minecraft_server_launchers
     private PerformanceCounter pfcRam = new()
     {
       CategoryName = "Process",
-      CounterName = "Working Set - Private",
-      InstanceName = "java"
+      CounterName = "Working Set - Private"
     };
     private double usageRam;
     private int playerCnt;
@@ -161,6 +160,7 @@ namespace minecraft_server_launchers
       Server.MinRam = Math.Min(1, sliMinRam.Value);
       Server.WorkingDirectory = serverPath;
       Server.Start();
+      pfcRam.InstanceName = $"{Server.process.ProcessName}#{Server.process.SessionId}";
     }
 
     private void btnInput_Click(object sender, EventArgs e)

@@ -19,6 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Main.Designer.cs~RFc364ff.TMP" />
     <None Remove="MaterialSkin.dll" />
     <None Remove="Newtonsoft.Json.dll" />
     <None Include="icon.ico">

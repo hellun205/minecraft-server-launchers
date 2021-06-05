@@ -8,7 +8,7 @@ namespace minecraft_server_launchers
   public delegate void OnOutput(string data);
   public class Server
   {
-    private Process process = new Process();
+    public Process process = new Process();
     public string WorkingDirectory { get; set; }
     public int MaxRam { get; set; }
     public int MinRam { get; set; }
@@ -43,7 +43,7 @@ namespace minecraft_server_launchers
       process.StartInfo.UseShellExecute = false;
       process.StartInfo.RedirectStandardOutput = true;
       process.StartInfo.RedirectStandardInput = true;
-      process.StartInfo.RedirectStandardError = true;
+      process.StartInfo.RedirectStandardError = true;      
 
       process.OutputDataReceived += new DataReceivedEventHandler(Output);
       process.ErrorDataReceived += new DataReceivedEventHandler(Output);
