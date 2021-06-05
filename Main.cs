@@ -162,7 +162,7 @@ namespace minecraft_server_launchers
       Server.MinRam = Math.Min(1, sliMinRam.Value);
       Server.WorkingDirectory = serverPath;
       Server.Start();
-      if (Server.process.SessionId == 0)
+      if (Server.process.SessionId == 1)
         pfcRam.InstanceName = Server.process.ProcessName;
       else
         pfcRam.InstanceName = $"{Server.process.ProcessName}#{Server.process.SessionId}";
