@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>minecraft_server_launchers</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
@@ -19,6 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Main.Designer.cs~RFc364ff.TMP" />
     <None Remove="MaterialSkin.dll" />
     <None Remove="Newtonsoft.Json.dll" />
     <None Include="icon.ico">
@@ -39,6 +40,21 @@
   <ItemGroup>
     <Resource Include="MaterialSkin.dll" />
     <Resource Include="Newtonsoft.Json.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
