@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace minecraft_server_launchers
 {
@@ -22,8 +24,7 @@ namespace minecraft_server_launchers
     public EditFileList(string directoryPath, string[] exts) : this()
     {
       DirectoryPath = directoryPath;
-      foreach (var str in exts)
-        Exts.Add(str);
+      Exts = exts.ToList();
       Refresh_();
     }
 
@@ -32,8 +33,8 @@ namespace minecraft_server_launchers
       Items.Add(new(path));
       //Items[Items.Count - 1].panel.PanelExpand += OnReLoc_;
       //Items[Items.Count - 1].panel.PanelCollapse += OnReLoc_;
-      Items[Items.Count - 1].Resize += OnReLoc_;
-      Controls.Add(Items[Items.Count - 1]);
+      Items[^1].Resize += OnReLoc_;
+      Controls.Add(Items[^1]);
       OnReLoc();
     }
 
@@ -41,13 +42,16 @@ namespace minecraft_server_launchers
     {
       OnReLoc();
     }
+
     private void OnReLoc()
     {
       if (Items.Count > 1)
-        for (var i = 1; i < Items.Count; i++)
+      {
+        for (var i = 1; i < Items.Count - 1; i++)
         {
           Items[i].Top = Items[i - 1].Top + Items[i - 1].Height + 5;
         }
+      }
     }
 
     private void EditFileList_Resize(object sender, EventArgs e)
@@ -59,7 +63,7 @@ namespace minecraft_server_launchers
         //item.panel.ExpandHeight = (int)((double)Height * 0.3);
       }
     }
-    
+
     public void Refresh_()
     {
       Controls.Clear();

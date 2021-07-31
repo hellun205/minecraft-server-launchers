@@ -23,8 +23,8 @@ namespace minecraft_server_launchers
 
     #region Component Designer generated code
 
-    /// <summary> 
-    /// Required method for Designer support - do not modify 
+    /// <summary>
+    /// Required method for Designer support - do not modify
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent()
@@ -42,7 +42,6 @@ namespace minecraft_server_launchers
       this.Size = new System.Drawing.Size(433, 407);
       this.Resize += new System.EventHandler(this.EditFileList_Resize);
       this.ResumeLayout(false);
-
     }
 
     #endregion

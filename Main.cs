@@ -70,21 +70,20 @@ namespace minecraft_server_launchers
           imlPlayer.Images[^1].Tag = playerName;
 
           lsvPList.Items.Add(playerName, imlPlayer.Images.Count - 1);
-          playerCnt++;
         }
-        else if (data.Contains("lost connection"))
+        else if (data.Contains("left the game"))
         {
-          var playerName = data.Split(" lost connection")[0].Split(": ")[1];
+          var playerName = data.Split(" left the game")[0].Split(": ")[1];
 
           foreach (var item in lsvPList.Items.Cast<ListViewItem>())
             if (item.Text == playerName)
+            {
               lsvPList.Items.Remove(item);
+            }
 
           foreach (var image in imlPlayer.Images.Cast<Image>())
             if ((string)image.Tag == playerName)
               imlPlayer.Images.Remove(image);
-
-          playerCnt--;
         }
       }
     }
@@ -260,7 +259,7 @@ namespace minecraft_server_launchers
 
       prbPInt.Maximum = playerMCnt;
       prbPInt.Value = (int)(Math.Max(prbPInt.Minimum, Math.Min(playerCnt, prbPInt.Maximum)));
-      labPStr.Text = $"{playerCnt} / {playerMCnt}";
+      labPStr.Text = $"{lsvPList.Items.Count} / {playerMCnt}";
     }
 
     private void Main_FormClosing(object sender, FormClosingEventArgs e)

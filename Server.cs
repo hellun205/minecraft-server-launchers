@@ -25,7 +25,7 @@ namespace minecraft_server_launchers
     {
       try
       {
-        ExecuteServ();
+        Execute();
       }
       catch
       {
@@ -34,7 +34,7 @@ namespace minecraft_server_launchers
       }
     }
 
-    private void ExecuteServ()
+    private void Execute()
     {
       process.StartInfo.FileName = "java.exe";
       process.StartInfo.Arguments = $"-Djline.terminal=jline.UnsupportedTerminal -Xmx{MaxRam}G -Xms{MinRam}G -jar \"{BukkitPath}\" nogui";
