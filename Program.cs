@@ -14,7 +14,9 @@ namespace minecraft_server_launchers
       Application.SetHighDpiMode(HighDpiMode.SystemAware);
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new Main());
+      Application.Run(new MultiServerLaunchers());
     }
+
+    public static string programName => "MSL 2.1";
   }
 }

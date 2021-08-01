@@ -20,4 +20,8 @@ D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft_serv
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.csproj.AssemblyReference.cache
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft_server_launchers.EditFileItem.resources
 D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft_server_launchers.EditFileList.resources
-D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.csproj.Fody.CopyLocal.cache
+D:\dev\csharp\minecraft-server-launchers\bin\Debug\net5.0-windows\MaterialSkin.dll
+D:\dev\csharp\minecraft-server-launchers\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft-server-launchers.csproj.CopyComplete
+D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft_server_launchers.MultiServerLaunchers.resources
+D:\dev\csharp\minecraft-server-launchers\obj\Debug\net5.0-windows\minecraft_server_launchers.AddServer.AddServerForm.resources

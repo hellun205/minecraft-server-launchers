@@ -526,7 +526,7 @@
       this.Name = "Main";
       this.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "MSL 2.1";
+      this.Text = Program.programName;
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
       this.tabControl.ResumeLayout(false);
       this.tpgLog.ResumeLayout(false);
